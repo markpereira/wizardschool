@@ -1,3 +1,7 @@
+var game = {
+    imagesPath: 'images/'
+};
+
 $(document).ready(function() {
     var game = new Phaser.Game(900, 600, Phaser.AUTO, 'game_canvas', { preload: preload, create: create, update: update });
     var lastName;
@@ -7,7 +11,7 @@ $(document).ready(function() {
         
       // here we run an if statement to choose which sprite to load
         
-        game.load.spritesheet('dude', '/assets/eriksprite.png', 32, 60);
+        game.load.spritesheet('dude', 'images/eriksprite.png', 32, 60);
         var playerName = 'Erik'
         lastName = 'froese'
        
@@ -18,44 +22,35 @@ $(document).ready(function() {
         game.add.text(200, 400, 'to learn more about ' + playerName, { font: '20px "Press Start 2P"', fill: '#fff' });
        
     // Now we start to create the other assets
-        game.load.image('forest', '/assets/forestbg.png');
-        game.load.image('treetall', '/assets/tree2.png', 900, 1462);                    
-        game.load.image('treestem', '/assets/tree-stem.png');
+        game.load.image('forest', 'images/forestbg.png');
+        game.load.image('treetall', 'images/tree2.png', 900, 1462);                    
+        game.load.image('treestem', 'images/tree-stem.png');
 
-
-        game.load.spritesheet('powerup', '/assets/powerup.png', 80, 74);
-        //adding background music
-        this.load.audio('music', '/assets/adventure.mp3', true);
-        //sprite audio
-        game.load.audio('butterflyCollect', '/assets/Powerup.ogg');
-        game.load.audio('jumping', '/assets/jumping.wav');
-        game.load.audio('victory', '/assets/victory.mp3');
-        game.load.audio('notice', '/assets/hifi.mp3');
-        game.load.audio('explode_sound', '/assets/explode.mp3');
+        game.load.spritesheet('powerup', 'images/powerup.png', 80, 74);
 
 
         //here we load two more assets for the other 'stars'
-        game.load.image('ground', '/assets/platform.png');
-        game.load.image('tree_tile', '/assets/tree_tile.png');
+        game.load.image('ground', 'images/platform.png');
+        game.load.image('tree_tile', 'images/tree_tile.png');
         
-        game.load.image('shortledge', '/assets/shortledge.png');
-        game.load.image('invshortledge', '/assets/inv_shortledge.png');
-        game.load.image('invplat', '/assets/inv_plat.png');
-        game.load.image('longledge', '/assets/longledge.png');
-        game.load.image('toadstool', '/assets/toadstool.png');
-        game.load.image('grass', '/assets/grass_ground.png');
+        game.load.image('shortledge', 'images/shortledge.png');
+        game.load.image('invshortledge', 'images/inv_shortledge.png');
+        game.load.image('invplat', 'images/inv_plat.png');
+        game.load.image('longledge', 'images/longledge.png');
+        game.load.image('toadstool', 'images/toadstool.png');
+        game.load.image('grass', 'images/grass_ground.png');
         // Button images
-        game.load.image('reset-button', '/assets/reset-button.png');
-        game.load.image('contact-button', '/assets/contact-button.png');
-        game.load.image('house', '/assets/house.png');
-        game.load.image('door', '/assets/door.png');
+        game.load.image('reset-button', 'images/reset-button.png');
+        game.load.image('contact-button', 'images/contact-button.png');
+        game.load.image('house', 'images/house.png');
+        game.load.image('door', 'images/door.png');
 
-        game.load.image('trunk', '/assets/invisibletrunk.png');
+        game.load.image('trunk', 'images/invisibletrunk.png');
         
-        game.load.spritesheet('baddie', '/assets/baddie.png', 32, 32);
-        game.load.spritesheet('explosion', '/assets/explode.png', 128, 128);
-        game.load.spritesheet('butterfly', '/assets/butterfly2.png', 70, 65);
-        game.load.spritesheet('butterflyJoel', '/assets/butterfly.png', 80, 80);
+        game.load.spritesheet('baddie', 'images/baddie.png', 32, 32);
+        game.load.spritesheet('explosion', 'images/explode.png', 128, 128);
+        game.load.spritesheet('butterfly', 'images/butterfly2.png', 70, 65);
+        game.load.spritesheet('butterflyJoel', 'images/butterfly.png', 80, 80);
     }
 
     var trees;
