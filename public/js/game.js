@@ -396,6 +396,7 @@ $(document).ready(function() {
         }
     }
     
+    // This function checks when the players last spoke, to avoid printing text overtop of text already on the canvas
     function lastSpoke () {
         if (this.game.time.now > this.LAST_SPOKE + 1500){
             this.LAST_SPOKE = this.game.time.now;
