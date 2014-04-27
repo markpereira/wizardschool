@@ -1,5 +1,5 @@
-var game = {
-    imagesPath: 'images/'
+var wizGame = {
+    imgPath: 'images/'
 };
 
 $(document).ready(function() {
@@ -11,9 +11,9 @@ $(document).ready(function() {
         
       // here we run an if statement to choose which sprite to load
         
-        game.load.spritesheet('dude', 'images/eriksprite.png', 32, 60);
-        var playerName = 'Erik'
-        lastName = 'froese'
+        game.load.spritesheet('dude', wizGame.imgPath + 'eriksprite.png', 32, 60);
+        var playerName = 'Erik';
+        lastName = 'froese';
        
 
         game.add.text(200, 280, 'Loading...', { font: '20px "Press Start 2P"', fill: '#fff' });
@@ -22,35 +22,35 @@ $(document).ready(function() {
         game.add.text(200, 400, 'to learn more about ' + playerName, { font: '20px "Press Start 2P"', fill: '#fff' });
        
     // Now we start to create the other assets
-        game.load.image('forest', 'images/forestbg.png');
-        game.load.image('treetall', 'images/tree2.png', 900, 1462);                    
-        game.load.image('treestem', 'images/tree-stem.png');
+        game.load.image('forest', wizGame.imgPath + 'forestbg.png');
+        game.load.image('treetall', wizGame.imgPath + 'tree2.png', 900, 1462);                    
+        game.load.image('treestem', wizGame.imgPath + 'tree-stem.png');
 
-        game.load.spritesheet('powerup', 'images/powerup.png', 80, 74);
+        game.load.spritesheet('powerup', wizGame.imgPath + 'powerup.png', 80, 74);
 
 
         //here we load two more assets for the other 'stars'
-        game.load.image('ground', 'images/platform.png');
-        game.load.image('tree_tile', 'images/tree_tile.png');
+        game.load.image('ground', wizGame.imgPath + 'platform.png');
+        game.load.image('tree_tile', wizGame.imgPath + 'tree_tile.png');
         
-        game.load.image('shortledge', 'images/shortledge.png');
-        game.load.image('invshortledge', 'images/inv_shortledge.png');
-        game.load.image('invplat', 'images/inv_plat.png');
-        game.load.image('longledge', 'images/longledge.png');
-        game.load.image('toadstool', 'images/toadstool.png');
-        game.load.image('grass', 'images/grass_ground.png');
+        game.load.image('shortledge', wizGame.imgPath + 'shortledge.png');
+        game.load.image('invshortledge', wizGame.imgPath + 'inv_shortledge.png');
+        game.load.image('invplat', wizGame.imgPath + 'inv_plat.png');
+        game.load.image('longledge', wizGame.imgPath + 'longledge.png');
+        game.load.image('toadstool', wizGame.imgPath + 'toadstool.png');
+        game.load.image('grass', wizGame.imgPath + 'grass_ground.png');
         // Button images
-        game.load.image('reset-button', 'images/reset-button.png');
-        game.load.image('contact-button', 'images/contact-button.png');
-        game.load.image('house', 'images/house.png');
-        game.load.image('door', 'images/door.png');
+        game.load.image('reset-button', wizGame.imgPath + 'reset-button.png');
+        game.load.image('contact-button', wizGame.imgPath + 'contact-button.png');
+        game.load.image('house', wizGame.imgPath + 'house.png');
+        game.load.image('door', wizGame.imgPath + 'door.png');
 
-        game.load.image('trunk', 'images/invisibletrunk.png');
+        game.load.image('trunk', wizGame.imgPath + 'invisibletrunk.png');
         
-        game.load.spritesheet('baddie', 'images/baddie.png', 32, 32);
-        game.load.spritesheet('explosion', 'images/explode.png', 128, 128);
-        game.load.spritesheet('butterfly', 'images/butterfly2.png', 70, 65);
-        game.load.spritesheet('butterflyJoel', 'images/butterfly.png', 80, 80);
+        game.load.spritesheet('baddie', wizGame.imgPath + 'baddie.png', 32, 32);
+        game.load.spritesheet('explosion', wizGame.imgPath + 'explode.png', 128, 128);
+        game.load.spritesheet('butterfly', wizGame.imgPath + 'butterfly2.png', 70, 65);
+        game.load.spritesheet('butterflyJoel', wizGame.imgPath + 'butterfly.png', 80, 80);
     }
 
     var trees;
@@ -215,7 +215,7 @@ $(document).ready(function() {
 
         //  Player physics properties.
         player.body.bounce.y = 0.2;
-        player.body.gravity.y = 300;
+        // player.body.gravity.y = 300;
         player.body.collideWorldBounds = true;
 
         //  Our two animations, walking left and right.
@@ -361,6 +361,7 @@ $(document).ready(function() {
         game.physics.arcade.overlap(player, baddies, killPlayer, null, this);
         //  Reset the players velocity (movement)
         player.body.velocity.x = 0;
+        player.body.velocity.y = 0;
 
         if (cursors.left.isDown)
         {
@@ -387,10 +388,12 @@ $(document).ready(function() {
         }
         
         //  Allow the player to jump if they are touching the ground.
-        if (cursors.up.isDown && player.body.touching.down)
+        if (cursors.up.isDown)
         {
-            player.body.velocity.y = -360;
+            player.body.velocity.y = -200;
             jumping.play('');
+        } else if (cursors.down.isDown) {
+            player.body.velocity.y = 200;
         }
     }
     
