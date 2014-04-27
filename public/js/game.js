@@ -1,9 +1,28 @@
 var wizGame = {
-    imgPath: 'images/'
+    //to reference the game object
+    phaser: undefined,
+
+    //to reference the player sprite
+    player: undefined,
+
+    //where the image assets are stored on the server
+    imgPath: 'images/',
+
+    movement: {
+        //a tolerance so player sprite doesn't need to exactly matchup with mouse click
+        tolerance: 5,
+        //the coordinates for the players mouse click (where to move to)
+        destX: undefined,
+        destY: undefined
+    }
 };
 
 $(document).ready(function() {
     var game = new Phaser.Game(900, 600, Phaser.AUTO, 'game_canvas', { preload: preload, create: create, update: update });
+
+    //temporary hack to allow access to game outside of document ready
+    wizGame.phaser = game;
+
     var lastName;
 
     function preload() {
@@ -22,35 +41,35 @@ $(document).ready(function() {
         game.add.text(200, 400, 'to learn more about ' + playerName, { font: '20px "Press Start 2P"', fill: '#fff' });
        
     // Now we start to create the other assets
-        game.load.image('forest', wizGame.imgPath + 'forestbg.png');
-        game.load.image('treetall', wizGame.imgPath + 'tree2.png', 900, 1462);                    
-        game.load.image('treestem', wizGame.imgPath + 'tree-stem.png');
+        wizGame.phaser.load.image('forest', wizGame.imgPath + 'forestbg.png');
+        wizGame.phaser.load.image('treetall', wizGame.imgPath + 'tree2.png', 900, 1462);                    
+        wizGame.phaser.load.image('treestem', wizGame.imgPath + 'tree-stem.png');
 
-        game.load.spritesheet('powerup', wizGame.imgPath + 'powerup.png', 80, 74);
+        wizGame.phaser.load.spritesheet('powerup', wizGame.imgPath + 'powerup.png', 80, 74);
 
 
         //here we load two more assets for the other 'stars'
-        game.load.image('ground', wizGame.imgPath + 'platform.png');
-        game.load.image('tree_tile', wizGame.imgPath + 'tree_tile.png');
+        wizGame.phaser.load.image('ground', wizGame.imgPath + 'platform.png');
+        wizGame.phaser.load.image('tree_tile', wizGame.imgPath + 'tree_tile.png');
         
-        game.load.image('shortledge', wizGame.imgPath + 'shortledge.png');
-        game.load.image('invshortledge', wizGame.imgPath + 'inv_shortledge.png');
-        game.load.image('invplat', wizGame.imgPath + 'inv_plat.png');
-        game.load.image('longledge', wizGame.imgPath + 'longledge.png');
-        game.load.image('toadstool', wizGame.imgPath + 'toadstool.png');
-        game.load.image('grass', wizGame.imgPath + 'grass_ground.png');
+        wizGame.phaser.load.image('shortledge', wizGame.imgPath + 'shortledge.png');
+        wizGame.phaser.load.image('invshortledge', wizGame.imgPath + 'inv_shortledge.png');
+        wizGame.phaser.load.image('invplat', wizGame.imgPath + 'inv_plat.png');
+        wizGame.phaser.load.image('longledge', wizGame.imgPath + 'longledge.png');
+        wizGame.phaser.load.image('toadstool', wizGame.imgPath + 'toadstool.png');
+        wizGame.phaser.load.image('grass', wizGame.imgPath + 'grass_ground.png');
         // Button images
-        game.load.image('reset-button', wizGame.imgPath + 'reset-button.png');
-        game.load.image('contact-button', wizGame.imgPath + 'contact-button.png');
-        game.load.image('house', wizGame.imgPath + 'house.png');
-        game.load.image('door', wizGame.imgPath + 'door.png');
+        wizGame.phaser.load.image('reset-button', wizGame.imgPath + 'reset-button.png');
+        wizGame.phaser.load.image('contact-button', wizGame.imgPath + 'contact-button.png');
+        wizGame.phaser.load.image('house', wizGame.imgPath + 'house.png');
+        wizGame.phaser.load.image('door', wizGame.imgPath + 'door.png');
 
-        game.load.image('trunk', wizGame.imgPath + 'invisibletrunk.png');
+        wizGame.phaser.load.image('trunk', wizGame.imgPath + 'invisibletrunk.png');
         
-        game.load.spritesheet('baddie', wizGame.imgPath + 'baddie.png', 32, 32);
-        game.load.spritesheet('explosion', wizGame.imgPath + 'explode.png', 128, 128);
-        game.load.spritesheet('butterfly', wizGame.imgPath + 'butterfly2.png', 70, 65);
-        game.load.spritesheet('butterflyJoel', wizGame.imgPath + 'butterfly.png', 80, 80);
+        wizGame.phaser.load.spritesheet('baddie', wizGame.imgPath + 'baddie.png', 32, 32);
+        wizGame.phaser.load.spritesheet('explosion', wizGame.imgPath + 'explode.png', 128, 128);
+        wizGame.phaser.load.spritesheet('butterfly', wizGame.imgPath + 'butterfly2.png', 70, 65);
+        wizGame.phaser.load.spritesheet('butterflyJoel', wizGame.imgPath + 'butterfly.png', 80, 80);
     }
 
     var trees;
@@ -76,29 +95,29 @@ $(document).ready(function() {
     var scoreText;
 
     function create() {
-        game.world.setBounds(0, 0, 4800, 1200);
+        wizGame.phaser.world.setBounds(0, 0, 4800, 1200);
         //  We're going to be using physics, so enable the Arcade Physics system
-        game.physics.startSystem(Phaser.Physics.ARCADE);
+        wizGame.phaser.physics.startSystem(Phaser.Physics.ARCADE);
 
         //  A simple background for our game
-        game.add.sprite(0, 0, 'forest');
+        wizGame.phaser.add.sprite(0, 0, 'forest');
         
         // this keeps track of the last time an NPC 'spoke'
         this.LAST_SPOKE = 0;
 
         // Play background music
-        music: Phaser.Sound;
-        this.music = this.add.audio('music', 1, true);
-        this.music.play();
-        // Put audio fx into variables to be called on an action
-        butterflyCollect = game.add.audio('butterflyCollect');
-        jumping = game.add.audio('jumping');
-        victory = game.add.audio('victory');
-        notice = game.add.audio('notice');
-        explode_sound = game.add.audio('explode_sound');
+        // music: Phaser.Sound;
+        // this.music = this.add.audio('music', 1, true);
+        // this.music.play();
+        // // Put audio fx into variables to be called on an action
+        // butterflyCollect = game.add.audio('butterflyCollect');
+        // jumping = game.add.audio('jumping');
+        // victory = game.add.audio('victory');
+        // notice = game.add.audio('notice');
+        // explode_sound = game.add.audio('explode_sound');
 
         //  The platforms group contains the ground and the 2 ledges we can jump on
-        platforms = game.add.group();
+        platforms = wizGame.phaser.add.group();
 
         //  We will enable physics for any object that is created in this group
         platforms.enableBody = true;
@@ -150,7 +169,7 @@ $(document).ready(function() {
 
         // Here are some tree/trunk/top pairings. Trees have no 'body', trunks and tops are invislbe, but do.
         
-        trees = game.add.group();
+        trees = wizGame.phaser.add.group();
 
         var tree = trees.create(800, 480 , 'treetall');
         
@@ -211,6 +230,9 @@ $(document).ready(function() {
 
         // The player and its settings
         player = game.add.sprite(200, game.world.height - 150, 'dude');
+
+        //temporary hack to allow access to the player outside of document ready
+        wizGame.player = player;
 
         //  enable physics on the player
         game.physics.arcade.enable(player);
@@ -361,6 +383,11 @@ $(document).ready(function() {
         // KILL PLAYER IF HE BUMPS INTO BAD GUY
         game.physics.arcade.overlap(player, enemies, killPlayer, null, this);
         game.physics.arcade.overlap(player, baddies, killPlayer, null, this);
+
+        //--------------------------------------
+        // PLAYER MOVEMENT WITH KEYS
+        //--------------------------------------
+
         //  Reset the players velocity (movement)
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
@@ -390,13 +417,44 @@ $(document).ready(function() {
         }
         
         //  Allow the player to jump if they are touching the ground.
-        if (cursors.up.isDown)
-        {
+        if (cursors.up.isDown) {
             player.body.velocity.y = -200;
-            jumping.play('');
         } else if (cursors.down.isDown) {
             player.body.velocity.y = 200;
         }
+
+        //--------------------------------------
+        // PLAYER MOVEMENT WITH MOUSE
+        //--------------------------------------
+
+        if (game.input.mousePointer.isDown) {
+            //  400 is the speed it will move towards the mouse
+            game.physics.arcade.moveToPointer(player, 200);
+            
+            // save the mouseclick location in a variable
+            wizGame.movement.destX = game.input.x;
+            wizGame.movement.destY = game.input.y;
+
+        }
+
+        // //HORIZONTAL MOVEMENT
+        // if (wizGame.movement.destX > (wizGame.player.x + wizGame.movement.tolerance)) {
+        //     player.body.velocity.x = 200;
+        // } else if (wizGame.movement.destX < (wizGame.player.x - wizGame.movement.tolerance)) {
+        //     player.body.velocity.x = -200;
+        // } else {
+        //     player.body.velocity.x = 0;
+        // }
+
+        // //VERTICAL MOVEMENT
+        // if (wizGame.movement.destY > (wizGame.player.y + wizGame.movement.tolerance)) {
+        //     player.body.velocity.y = 200;
+        // } else if (wizGame.movement.destY < (wizGame.player.y - wizGame.movement.tolerance)) {
+        //     player.body.velocity.y = -200;
+        // } else {
+        //     player.body.velocity.y = 0;
+        // }
+
     }
     
     // This function checks when the players last spoke, to avoid printing text overtop of text already on the canvas
@@ -464,9 +522,6 @@ $(document).ready(function() {
         score_style = { font: "20px Arial", fill: "#fff", align: "center" };
         scoreText = game.add.text(20, 20, "No. Butterflies: " + score, score_style);
         scoreText.fixedToCamera = true;
-
-        // This simply plays a sound effect each time an item is collected.
-        butterflyCollect.play('');
 
     }
 
