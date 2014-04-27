@@ -83,6 +83,8 @@ $(document).ready(function() {
         //  A simple background for our game
         game.add.sprite(0, 0, 'forest');
         
+        // this keeps track of the last time an NPC 'spoke'
+        this.LAST_SPOKE = 0;
 
         // Play background music
         music: Phaser.Sound;
@@ -252,12 +254,12 @@ $(document).ready(function() {
         butterflies.callAll('animations.play', 'animations', 'fly');
 
         // create special easter egg butterfly
-        butterflyJoel = game.add.sprite(1410, 70, 'butterflyJoel');
+        butterflyJoel = game.add.sprite(250, 1050, 'butterflyJoel');
         game.physics.arcade.enable(butterflyJoel);
         butterflyJoel.enableBody = true;
         butterflyJoel.body.immovable = true;
         // Full opacity so it's invisible
-        butterflyJoel.alpha = 0.01;
+        // butterflyJoel.alpha = 0.01;
        
         butterflyJoel.animations.add('flutter', [0, 1, 2, 3], 10, true);
         butterflyJoel.animations.play('flutter');
@@ -354,7 +356,7 @@ $(document).ready(function() {
         game.physics.arcade.overlap(player, butterflies, collectButterfly, null, this);
 
         //  Checks to see if the player overlaps with the butterflyJoel, if he does call the easterEgg function
-        game.physics.arcade.collide(player, butterflyJoel, easterEgg, null, this);
+        game.physics.arcade.overlap(player, butterflyJoel, easterEgg, lastSpoke, this);
 
         // KILL PLAYER IF HE BUMPS INTO BAD GUY
         game.physics.arcade.overlap(player, enemies, killPlayer, null, this);
@@ -397,16 +399,24 @@ $(document).ready(function() {
         }
     }
     
+    // This function checks when the players last spoke, to avoid printing text overtop of text already on the canvas
+    function lastSpoke () {
+        if (this.game.time.now > this.LAST_SPOKE + 1500){
+            this.LAST_SPOKE = this.game.time.now;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function easterEgg (player, butterflyJoel) {
-        // Gets rid of opacity so that the easterEgg appears
-        butterflyJoel.alpha  = 1;
+    
         // Samples an array of Joel's best comments
         joelStyle = { font: "30px Arial", fill: "#fff", align: "center" };
-        // var joelisms = ["\"Have the best time... seriously.\"", "\"Turn up the autism for that one.\""]
-        // var joelText = game.add.text(1350, 270, _.sample(joelisms), joelStyle);
-        var joelText = game.add.text(1350, 270, "\"Have the best time... seriously.\"", joelStyle);   
-        // Audio effect
-        notice.play('');
+        var joelisms = ["\"Have the best time... seriously.\"", "\"Turn up the autism for that one.\""]
+        var joelText = game.add.text(300, 960, _.sample(joelisms), joelStyle);
+        // var joelText = game.add.text(300, 960, "\"Have the best time... seriously.\"", joelStyle);   
+       
         // Call removeText function after a couple seconds
         setTimeout(removeText, 1500);
 
