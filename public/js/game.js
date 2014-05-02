@@ -30,15 +30,15 @@ $(document).ready(function() {
         
       // here we run an if statement to choose which sprite to load
         
-        game.load.spritesheet('dude', wizGame.imgPath + 'eriksprite.png', 32, 60);
+        wizGame.phaser.load.spritesheet('dude', wizGame.imgPath + 'eriksprite.png', 32, 60);
         var playerName = 'Erik';
         lastName = 'froese';
        
 
-        game.add.text(200, 280, 'Loading...', { font: '20px "Press Start 2P"', fill: '#fff' });
-        game.add.text(200, 360, 'Collect the seven butterflies', { font: '20px "Press Start 2P"', fill: '#fff' });
-        game.add.text(200, 380, 'and take them to the house', { font: '20px "Press Start 2P"', fill: '#fff' });
-        game.add.text(200, 400, 'to learn more about ' + playerName, { font: '20px "Press Start 2P"', fill: '#fff' });
+        wizGame.phaser.add.text(200, 280, 'Loading...', { font: '20px "Press Start 2P"', fill: '#fff' });
+        wizGame.phaser.add.text(200, 360, 'Collect the seven butterflies', { font: '20px "Press Start 2P"', fill: '#fff' });
+        wizGame.phaser.add.text(200, 380, 'and take them to the house', { font: '20px "Press Start 2P"', fill: '#fff' });
+        wizGame.phaser.add.text(200, 400, 'to learn more about ' + playerName, { font: '20px "Press Start 2P"', fill: '#fff' });
        
     // Now we start to create the other assets
         wizGame.phaser.load.image('forest', wizGame.imgPath + 'forestbg.png');
@@ -46,7 +46,6 @@ $(document).ready(function() {
         wizGame.phaser.load.image('treestem', wizGame.imgPath + 'tree-stem.png');
 
         wizGame.phaser.load.spritesheet('powerup', wizGame.imgPath + 'powerup.png', 80, 74);
-
 
         //here we load two more assets for the other 'stars'
         wizGame.phaser.load.image('ground', wizGame.imgPath + 'platform.png');
@@ -105,17 +104,6 @@ $(document).ready(function() {
         // this keeps track of the last time an NPC 'spoke'
         this.LAST_SPOKE = 0;
 
-        // Play background music
-        // music: Phaser.Sound;
-        // this.music = this.add.audio('music', 1, true);
-        // this.music.play();
-        // // Put audio fx into variables to be called on an action
-        // butterflyCollect = game.add.audio('butterflyCollect');
-        // jumping = game.add.audio('jumping');
-        // victory = game.add.audio('victory');
-        // notice = game.add.audio('notice');
-        // explode_sound = game.add.audio('explode_sound');
-
         //  The platforms group contains the ground and the 2 ledges we can jump on
         platforms = wizGame.phaser.add.group();
 
@@ -149,6 +137,9 @@ $(document).ready(function() {
            4250: 550,
            4600: 350
         }
+
+        console.log(shortledge_coords);
+        
         // The following iterates through the coordinates and creates the ledges
         for (var key in shortledge_coords) {
             var ledge = platforms.create( parseInt(key), shortledge_coords[key], 'shortledge');
@@ -245,6 +236,7 @@ $(document).ready(function() {
         //  Our two animations, walking left and right.
         player.animations.add('left', [0, 1, 2, 3], 10, true);
         player.animations.add('right', [5, 6, 7, 8], 10, true);
+        
         game.camera.follow(player);
             
         // Butterflies create
@@ -388,35 +380,26 @@ $(document).ready(function() {
         // PLAYER MOVEMENT WITH KEYS
         //--------------------------------------
 
-        //  Reset the players velocity (movement)
+        //Reset the players velocity (movement)
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
 
-        if (cursors.left.isDown)
-        {
+        if (cursors.left.isDown) {
             //  Move to the left
             player.body.velocity.x = -200;
-
             player.animations.play('left');
             
-        }
-        else if (cursors.right.isDown)
-        {
+        } else if (cursors.right.isDown) {
             //  Move to the right
             player.body.velocity.x = 200;
-
             player.animations.play('right');
-
-        }
-        else
-        {
+        } else {
             //  Stand still
             player.animations.stop();
-
             player.frame = 4;
         }
         
-        //  Allow the player to jump if they are touching the ground.
+        //  Allow the player to move up / down
         if (cursors.up.isDown) {
             player.body.velocity.y = -200;
         } else if (cursors.down.isDown) {
@@ -428,32 +411,38 @@ $(document).ready(function() {
         //--------------------------------------
 
         if (game.input.mousePointer.isDown) {
-            //  400 is the speed it will move towards the mouse
-            game.physics.arcade.moveToPointer(player, 200);
+
+            console.log("click detected");
+            //NEED TO THROTTLE THIS FUNCTION TO PREVENT TOO MANY READINGS
+            //A COLLISION SHOULD CLEAR THE MOVEMENT DESTINATION
             
-            // save the mouseclick location in a variable
-            wizGame.movement.destX = game.input.x;
-            wizGame.movement.destY = game.input.y;
+            // save the mouseclick location on the canvas in a variable
+            wizGame.movement.destX = game.input.worldX - (wizGame.player.width / 2);
+            wizGame.movement.destY = game.input.worldY - (wizGame.player.height / 2);
+            // console.log(game.input.x, game.input.y);
+            console.log(game.input.worldX, game.input.worldY);
 
         }
 
-        // //HORIZONTAL MOVEMENT
-        // if (wizGame.movement.destX > (wizGame.player.x + wizGame.movement.tolerance)) {
-        //     player.body.velocity.x = 200;
-        // } else if (wizGame.movement.destX < (wizGame.player.x - wizGame.movement.tolerance)) {
-        //     player.body.velocity.x = -200;
-        // } else {
-        //     player.body.velocity.x = 0;
-        // }
+        if (typeof wizGame.movement.destX != 'undefined') {
+            //HORIZONTAL MOVEMENT
+            if (wizGame.movement.destX > (wizGame.player.x + wizGame.movement.tolerance)) {
+                player.body.velocity.x = 200;
+            } else if (wizGame.movement.destX < (wizGame.player.x - wizGame.movement.tolerance)) {
+                player.body.velocity.x = -200;
+            } else {
+                player.body.velocity.x = 0;
+            }
 
-        // //VERTICAL MOVEMENT
-        // if (wizGame.movement.destY > (wizGame.player.y + wizGame.movement.tolerance)) {
-        //     player.body.velocity.y = 200;
-        // } else if (wizGame.movement.destY < (wizGame.player.y - wizGame.movement.tolerance)) {
-        //     player.body.velocity.y = -200;
-        // } else {
-        //     player.body.velocity.y = 0;
-        // }
+            //VERTICAL MOVEMENT
+            if (wizGame.movement.destY > (wizGame.player.y + wizGame.movement.tolerance)) {
+                player.body.velocity.y = 200;
+            } else if (wizGame.movement.destY < (wizGame.player.y - wizGame.movement.tolerance)) {
+                player.body.velocity.y = -200;
+            } else {
+                player.body.velocity.y = 0;
+            }
+        }
 
     }
     
@@ -568,7 +557,7 @@ $(document).ready(function() {
         // When the contact button is clicked it redirects through to contact form
         function actionOnContactClick () {
 
-            window.location = ("/contacts/" + lastName)
+            window.location = ("/contacts/" + lastName);
             
         } 
     } 
