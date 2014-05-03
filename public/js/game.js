@@ -41,7 +41,7 @@ $(document).ready(function() {
 
         wizGame.phaser.load.spritesheet('powerup', wizGame.imgPath + 'powerup.png', 80, 74);
 
-        wizGame.phaser.load.image('ground', wizGame.imgPath + 'platform.png');
+        // wizGame.phaser.load.image('ground', wizGame.imgPath + 'platform.png');
         
         wizGame.phaser.load.image('longledge', wizGame.imgPath + 'longledge.png');
        
@@ -354,24 +354,8 @@ $(document).ready(function() {
 
     function collectButterfly (player, butterfly) {
         
-        // Removes the star from the screen
+        // Removes the butterfy from the screen
         butterfly.kill();
-
-        //this line fades in resume content when a star is collected
-        $('#'+butterfly.id).children('li').hide().css('visibility','visible').fadeIn(2000);
-        //slides the accordian up or down to show resume content as stars are collected
-        var $section = $('#'+butterfly.id).closest('ul');
-        if (! $section.is(':visible')) {
-            $section.prev('h3').trigger('click');
-        }  
-        
-        //highlight sidebar tabs when something is selected
-        function highlight() {
-            $section.prev('h3').css('background', 'linear-gradient(#226758, #32957B)').fadeOut(1000, function() {
-                $section.prev('h3').css('background', 'linear-gradient(#272822, #3B3A32)').fadeIn(400);
-            });
-        }
-
         powerup = game.add.sprite(player.body.x -32, player.body.y, 'powerup');
         powerup.animations.add('collect', [0, 1, 2, 3, 4, 5], 50, true);
         powerup.animations.play('collect');
@@ -381,8 +365,6 @@ $(document).ready(function() {
           powerup.kill();  
         }
         
-
-        highlight();
         
         // updates the score so we can check in the winChecker function if player has collected all the stars.
         score += 1;
