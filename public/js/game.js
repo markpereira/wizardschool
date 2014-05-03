@@ -27,7 +27,6 @@ $(document).ready(function() {
 
     function preload() {
     
-        
       // here we run an if statement to choose which sprite to load
         
         wizGame.phaser.load.spritesheet('dude', wizGame.imgPath + 'eriksprite.png', 32, 60);
@@ -39,31 +38,25 @@ $(document).ready(function() {
         wizGame.phaser.add.text(200, 360, 'Collect the seven butterflies', { font: '20px "Press Start 2P"', fill: '#fff' });
         wizGame.phaser.add.text(200, 380, 'and take them to the house', { font: '20px "Press Start 2P"', fill: '#fff' });
         wizGame.phaser.add.text(200, 400, 'to learn more about ' + playerName, { font: '20px "Press Start 2P"', fill: '#fff' });
-       
-    // Now we start to create the other assets
-        wizGame.phaser.load.image('forest', wizGame.imgPath + 'forestbg.png');
-        wizGame.phaser.load.image('treetall', wizGame.imgPath + 'tree2.png', 900, 1462);                    
-        wizGame.phaser.load.image('treestem', wizGame.imgPath + 'tree-stem.png');
 
         wizGame.phaser.load.spritesheet('powerup', wizGame.imgPath + 'powerup.png', 80, 74);
 
         //here we load two more assets for the other 'stars'
         wizGame.phaser.load.image('ground', wizGame.imgPath + 'platform.png');
-        wizGame.phaser.load.image('tree_tile', wizGame.imgPath + 'tree_tile.png');
+        // wizGame.phaser.load.image('tree_tile', wizGame.imgPath + 'tree_tile.png');
         
-        wizGame.phaser.load.image('shortledge', wizGame.imgPath + 'shortledge.png');
-        wizGame.phaser.load.image('invshortledge', wizGame.imgPath + 'inv_shortledge.png');
-        wizGame.phaser.load.image('invplat', wizGame.imgPath + 'inv_plat.png');
+        // wizGame.phaser.load.image('shortledge', wizGame.imgPath + 'shortledge.png');
+        // wizGame.phaser.load.image('invshortledge', wizGame.imgPath + 'inv_shortledge.png');
+        // wizGame.phaser.load.image('invplat', wizGame.imgPath + 'inv_plat.png');
         wizGame.phaser.load.image('longledge', wizGame.imgPath + 'longledge.png');
-        wizGame.phaser.load.image('toadstool', wizGame.imgPath + 'toadstool.png');
-        wizGame.phaser.load.image('grass', wizGame.imgPath + 'grass_ground.png');
+        // wizGame.phaser.load.image('toadstool', wizGame.imgPath + 'toadstool.png');
+        // wizGame.phaser.load.image('grass', wizGame.imgPath + 'grass_ground.png');
+
         // Button images
         wizGame.phaser.load.image('reset-button', wizGame.imgPath + 'reset-button.png');
         wizGame.phaser.load.image('contact-button', wizGame.imgPath + 'contact-button.png');
-        wizGame.phaser.load.image('house', wizGame.imgPath + 'house.png');
-        wizGame.phaser.load.image('door', wizGame.imgPath + 'door.png');
-
-        wizGame.phaser.load.image('trunk', wizGame.imgPath + 'invisibletrunk.png');
+        // wizGame.phaser.load.image('house', wizGame.imgPath + 'house.png');
+        // wizGame.phaser.load.image('door', wizGame.imgPath + 'door.png');
         
         wizGame.phaser.load.spritesheet('baddie', wizGame.imgPath + 'baddie.png', 32, 32);
         wizGame.phaser.load.spritesheet('explosion', wizGame.imgPath + 'explode.png', 128, 128);
@@ -71,22 +64,14 @@ $(document).ready(function() {
         wizGame.phaser.load.spritesheet('butterflyJoel', wizGame.imgPath + 'butterfly.png', 80, 80);
     }
 
-    var trees;
     var player;
     var platforms;
     var cursors;
-    var powerup;
-    var stars;
     var button;
-    var music;
-    var jumping;
-    var grass;
-    var door;
     var butterflies;
     var enemies;
     var ledge;
     var butterflyJoel;
-    var explode_sound;
     var roof;
             
     //here we set two more vars
@@ -94,12 +79,12 @@ $(document).ready(function() {
     var scoreText;
 
     function create() {
+
+        //setting the game canvas size
         wizGame.phaser.world.setBounds(0, 0, 4800, 1200);
+
         //  We're going to be using physics, so enable the Arcade Physics system
         wizGame.phaser.physics.startSystem(Phaser.Physics.ARCADE);
-
-        //  A simple background for our game
-        wizGame.phaser.add.sprite(0, 0, 'forest');
         
         // this keeps track of the last time an NPC 'spoke'
         this.LAST_SPOKE = 0;
@@ -109,42 +94,6 @@ $(document).ready(function() {
 
         //  We will enable physics for any object that is created in this group
         platforms.enableBody = true;
-
-
-        //  Now let's create the ledges
-        //the first number says how many pixels from the left border it is
-        //a negative number puts the ledge off the screen to the left
-        //ledges have a fixed width, so to shorten them you have to put them off the screen
-        //the second number says how far from the top of the page it is.    
-
-        // These are the coordinates for the short ledges
-        var shortledge_coords = {
-           250: 800,
-           550: 650,
-           1450: 500,
-           1750: 300,
-           2050: 500,
-           2300: 650,
-           2700: 650,
-           2700: 950,
-           2800: 600,
-           3000: 800,
-           3500: 750,
-           3500: 950,
-           3800: 450,
-           3900: 750,
-           4250: 150,
-           4250: 550,
-           4600: 350
-        }
-
-        console.log(shortledge_coords);
-        
-        // The following iterates through the coordinates and creates the ledges
-        for (var key in shortledge_coords) {
-            var ledge = platforms.create( parseInt(key), shortledge_coords[key], 'shortledge');
-            ledge.body.immovable = true;  
-        }
    
         // Here we create the long ledges
         var longledge_coords = {
@@ -157,39 +106,6 @@ $(document).ready(function() {
             ledge.body.immovable = true;  
         }
 
-
-        // Here are some tree/trunk/top pairings. Trees have no 'body', trunks and tops are invislbe, but do.
-        
-        trees = wizGame.phaser.add.group();
-
-        var tree = trees.create(800, 480 , 'treetall');
-        
-        ledge = platforms.create(1000, 600 , 'trunk');
-        ledge.body.immovable = true;
-
-        ledge = platforms.create(10, 945, 'treestem');
-        ledge.body.immovable = true;
-
-        ledge = platforms.create(840, 580 , 'invplat');
-        ledge.body.immovable = true;
-
-        tree = trees.create(3100, 480 , 'treetall');
-        
-        ledge = platforms.create(3300, 600 , 'trunk');
-        ledge.body.immovable = true;
-
-        ledge = platforms.create(3140, 580 , 'invplat');
-        ledge.body.immovable = true;
-        
-               
-        // This it he bonsai tree
-        ledge = platforms.create(1900, 730, 'tree_tile');
-        ledge.body.immovable = true;
-
-        //secret ledge for an easter egg to go on.
-        ledge = platforms.create(1400, 150, 'invshortledge');
-        ledge.body.immovable = true;
-
          // Here we create the ground.
         var ground = platforms.create(0, game.world.height - 64, 'ground');
 
@@ -198,26 +114,6 @@ $(document).ready(function() {
 
         //  This stops it from falling away when you jump on it
         ground.body.immovable = true;
-
-        // GRASS. Create 12 grass, each moving 400 to the right to form a continuous layer
-        grasses = game.add.group();
-        var x_pos = 0
-        for (var i = 0; i < 12; i++)
-        {
-            grass = grasses.create(x_pos, game.world.height - 81, 'grass'); 
-            x_pos = x_pos + 400 
-
-        }
-        // HOUSE 
-        var house = game.add.sprite(4000, 925, "house");
-        door = game.add.sprite(4170, game.world.height - 139, "door");   
-        game.physics.arcade.enable(door);
-        door.body.immovable = true;
-        
-        // WILL ADD ROOF TO HOUSE LATER
-        // var roof = game.add.sprite(200, game.world.height - 139, "shortledge");
-        // game.physics.arcade.enable(roof);
-        // roof.body.immovable = true;
 
         // The player and its settings
         player = game.add.sprite(200, game.world.height - 150, 'dude');
@@ -274,6 +170,10 @@ $(document).ready(function() {
         butterflyJoel.body.immovable = true;
         // Full opacity so it's invisible
         // butterflyJoel.alpha = 0.01;
+
+        //------------
+        // ANIMATIONS
+        //------------
        
         butterflyJoel.animations.add('flutter', [0, 1, 2, 3], 10, true);
         butterflyJoel.animations.play('flutter');
@@ -362,11 +262,8 @@ $(document).ready(function() {
         // ENEMY ADDED HERE====================
         game.physics.arcade.collide(enemies, platforms);
         game.physics.arcade.collide(baddies, platforms);
-        
-        // This lets the user win if they run into the door.
-        game.physics.arcade.overlap(player, door, winChecker, null, this);
 
-         //  Checks to see if the player overlaps with any of the butterflies, if he does call the collectStar function
+        //  Checks to see if the player overlaps with any of the butterflies, if he does call the collectStar function
         game.physics.arcade.overlap(player, butterflies, collectButterfly, null, this);
 
         //  Checks to see if the player overlaps with the butterflyJoel, if he does call the easterEgg function
@@ -569,8 +466,8 @@ $(document).ready(function() {
         setTimeout(explode, 1500);
         setTimeout(gameOverText, 1500);
         setTimeout(gameRestart, 3000);
-        this.music.pause();
-        explode_sound.play(''); 
+        // this.music.pause();
+        // explode_sound.play(''); 
         function explode() {
           explosion.kill();
 
