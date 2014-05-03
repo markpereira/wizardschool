@@ -27,7 +27,7 @@ $(document).ready(function() {
 
     function preload() {
     
-      // here we run an if statement to choose which sprite to load
+      //here we load all of the assets we need
         
         wizGame.phaser.load.spritesheet('dude', wizGame.imgPath + 'eriksprite.png', 32, 60);
         var playerName = 'Erik';
@@ -41,23 +41,12 @@ $(document).ready(function() {
 
         wizGame.phaser.load.spritesheet('powerup', wizGame.imgPath + 'powerup.png', 80, 74);
 
-        //here we load two more assets for the other 'stars'
         wizGame.phaser.load.image('ground', wizGame.imgPath + 'platform.png');
-        // wizGame.phaser.load.image('tree_tile', wizGame.imgPath + 'tree_tile.png');
         
-        // wizGame.phaser.load.image('shortledge', wizGame.imgPath + 'shortledge.png');
-        // wizGame.phaser.load.image('invshortledge', wizGame.imgPath + 'inv_shortledge.png');
-        // wizGame.phaser.load.image('invplat', wizGame.imgPath + 'inv_plat.png');
         wizGame.phaser.load.image('longledge', wizGame.imgPath + 'longledge.png');
-        // wizGame.phaser.load.image('toadstool', wizGame.imgPath + 'toadstool.png');
-        // wizGame.phaser.load.image('grass', wizGame.imgPath + 'grass_ground.png');
-
-        // Button images
+       
         wizGame.phaser.load.image('reset-button', wizGame.imgPath + 'reset-button.png');
         wizGame.phaser.load.image('contact-button', wizGame.imgPath + 'contact-button.png');
-        // wizGame.phaser.load.image('house', wizGame.imgPath + 'house.png');
-        // wizGame.phaser.load.image('door', wizGame.imgPath + 'door.png');
-        
         wizGame.phaser.load.spritesheet('baddie', wizGame.imgPath + 'baddie.png', 32, 32);
         wizGame.phaser.load.spritesheet('explosion', wizGame.imgPath + 'explode.png', 128, 128);
         wizGame.phaser.load.spritesheet('butterfly', wizGame.imgPath + 'butterfly2.png', 70, 65);
@@ -125,8 +114,6 @@ $(document).ready(function() {
         game.physics.arcade.enable(player);
 
         //  Player physics properties.
-        player.body.bounce.y = 0.2;
-        // player.body.gravity.y = 300;
         player.body.collideWorldBounds = true;
 
         //  Our two animations, walking left and right.
@@ -181,11 +168,11 @@ $(document).ready(function() {
         //CREATE ENEMIES BELOW
         enemies = game.add.group();
         enemies.enableBody = true;
+
         for (var i = 0; i < 9; i++)
         {
             var enemy = enemies.create( 540 + (i * 700), 400, 'baddie');
-            enemy.body.gravity.y = 300;
-            enemy.body.bounce.y = 0.1 + Math.random() * 0.2;
+            enemy.body.collideWorldBounds = true;
             enemies.callAll('animations.add', 'animations', 'left', [0, 1], 10, true);        
             enemies.callAll('animations.add', 'animations', 'right', [2, 3], 10, true);   
 
@@ -196,8 +183,7 @@ $(document).ready(function() {
         for (var i = 0; i < 4; i++)
         {
             var baddy = baddies.create( 400 + (i * 900), 400, 'baddie');
-            baddy.body.gravity.y = 300;
-            baddy.body.bounce.y = 0.1 + Math.random() * 0.2;
+            baddy.body.collideWorldBounds = true;
             baddies.callAll('animations.add', 'animations', 'left', [0, 1], 10, true);        
             baddies.callAll('animations.add', 'animations', 'right', [2, 3], 10, true);   
 
@@ -250,12 +236,8 @@ $(document).ready(function() {
     
 
     function update() {
-         // WILL GET ROOF OF HOUSE WORKING LATER (ERIK)
-        // if (player.body.velocity.y >= 0){
-        //  game.physics.arcade.collide(player, roof);
-        // }
 
-        //  Collide the player and the stars with the platforms
+        //  Collide the player and butterflies with the platforms
         game.physics.arcade.collide(player, platforms);
         game.physics.arcade.collide(butterflies, platforms);
 
@@ -348,8 +330,8 @@ $(document).ready(function() {
         if (this.game.time.now > this.LAST_SPOKE + 1500){
             this.LAST_SPOKE = this.game.time.now;
             return true;
-        } else {
-            return false;
+          } else {
+              return false;
         }
     }
 
