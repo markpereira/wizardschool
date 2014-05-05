@@ -72,6 +72,9 @@ $(document).ready(function() {
         //setting the game canvas size
         wizGame.phaser.world.setBounds(0, 0, 4800, 1200);
 
+         // Set stage background color
+        this.game.stage.backgroundColor = 0x8B7765;
+
         //  We're going to be using physics, so enable the Arcade Physics system
         wizGame.phaser.physics.startSystem(Phaser.Physics.ARCADE);
         
@@ -83,7 +86,22 @@ $(document).ready(function() {
 
         //  We will enable physics for any object that is created in this group
         platforms.enableBody = true;
+
+        // The radius of the circle of light
+        this.LIGHT_RADIUS = 100;
    
+        // Create the shadow texture
+        this.shadowTexture = this.game.add.bitmapData(this.game.width, this.game.height);
+
+        // Create an object that will use the bitmap as a texture
+        var lightSprite = this.game.add.image(0, 0, this.shadowTexture);
+
+         // Set the blend mode to MULTIPLY. This will darken the colors of
+        // everything below this sprite.
+        lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
+
+        
+
         // Here we create the long ledges
         var longledge_coords = {
             1500: 970,
@@ -121,6 +139,11 @@ $(document).ready(function() {
         player.animations.add('right', [5, 6, 7, 8], 10, true);
         
         game.camera.follow(player);
+
+        // Simulate a pointer click/tap input at the center of the stage
+        // when the example begins running.
+        this.game.input.activePointer.x = player.body.x;
+        this.game.input.activePointer.y = player.body.y;
             
         // Butterflies create
         // The object below contains the butterfly coordinates
@@ -254,6 +277,40 @@ $(document).ready(function() {
         // KILL PLAYER IF HE BUMPS INTO BAD GUY
         game.physics.arcade.overlap(player, enemies, killPlayer, null, this);
         game.physics.arcade.overlap(player, baddies, killPlayer, null, this);
+
+          // Update the shadow texture each frame
+        //     this.updateShadowTexture();
+        // };
+
+        // updateShadowTexture = function() {
+            
+            // This function updates the shadow texture (this.shadowTexture).
+            // First, it fills the entire texture with a dark shadow color.
+            // Then it draws a white circle centered on the pointer position.
+            // Because the texture is drawn to the screen using the MULTIPLY
+            // blend mode, the dark areas of the texture make all of the colors
+            // underneath it darker, while the white area is unaffected.
+
+            // Draw shadow
+            this.shadowTexture.context.fillStyle = 'rgb(100, 100, 100)';
+            this.shadowTexture.context.fillRect(0, 0, this.game.width, this.game.height);
+
+            // Draw circle of light with a soft edge
+            var gradient = this.shadowTexture.context.createRadialGradient(
+                this.game.input.activePointer.x, this.game.input.activePointer.y, this.LIGHT_RADIUS * 0.75,
+                this.game.input.activePointer.x, this.game.input.activePointer.y, this.LIGHT_RADIUS);
+            gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+            gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+
+            this.shadowTexture.context.beginPath();
+            this.shadowTexture.context.fillStyle = gradient;
+            this.shadowTexture.context.arc(this.game.input.activePointer.x, this.game.input.activePointer.y,
+                this.LIGHT_RADIUS, 0, Math.PI*2);
+            this.shadowTexture.context.fill();
+
+            // This just tells the engine it should update the texture cache
+            this.shadowTexture.dirty = true;
+        // };
 
         //--------------------------------------
         // PLAYER MOVEMENT WITH KEYS
