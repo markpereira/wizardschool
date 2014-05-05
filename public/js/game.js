@@ -91,10 +91,12 @@ $(document).ready(function() {
         this.LIGHT_RADIUS = 100;
    
         // Create the shadow texture
-        this.shadowTexture = this.game.add.bitmapData(this.game.width, this.game.height);
+        this.shadowTexture = this.game.add.bitmapData(4800, 1200);
 
         // Create an object that will use the bitmap as a texture
-        var lightSprite = this.game.add.image(0, 0, this.shadowTexture);
+        // var lightSprite = this.game.add.image(0, 0, this.shadowTexture);
+        var lightSprite = this.game.add.image(0, 600, this.shadowTexture);
+        // var lightSprite = this.game.add.image(900, 600, this.shadowTexture);
 
          // Set the blend mode to MULTIPLY. This will darken the colors of
         // everything below this sprite.
@@ -139,11 +141,6 @@ $(document).ready(function() {
         player.animations.add('right', [5, 6, 7, 8], 10, true);
         
         game.camera.follow(player);
-
-        // Simulate a pointer click/tap input at the center of the stage
-        // when the example begins running.
-        this.game.input.activePointer.x = player.body.x;
-        this.game.input.activePointer.y = player.body.y;
             
         // Butterflies create
         // The object below contains the butterfly coordinates
@@ -297,14 +294,14 @@ $(document).ready(function() {
 
             // Draw circle of light with a soft edge
             var gradient = this.shadowTexture.context.createRadialGradient(
-                this.game.input.activePointer.x, this.game.input.activePointer.y, this.LIGHT_RADIUS * 0.75,
-                this.game.input.activePointer.x, this.game.input.activePointer.y, this.LIGHT_RADIUS);
+                this.game.camera.x, this.game.camera.y, this.LIGHT_RADIUS * 0.75,
+                this.game.camera.x, this.camera.y, this.LIGHT_RADIUS);
             gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
             gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
 
             this.shadowTexture.context.beginPath();
             this.shadowTexture.context.fillStyle = gradient;
-            this.shadowTexture.context.arc(this.game.input.activePointer.x, this.game.input.activePointer.y,
+            this.shadowTexture.context.arc(this.game.camera.x, this.game.camera.y,
                 this.LIGHT_RADIUS, 0, Math.PI*2);
             this.shadowTexture.context.fill();
 
