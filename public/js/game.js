@@ -91,16 +91,17 @@ $(document).ready(function() {
         this.LIGHT_RADIUS = 100;
    
         // Create the shadow texture
-        this.shadowTexture = this.game.add.bitmapData(4800, 1200);
+        this.shadowTexture = this.game.add.bitmapData(this.world.width, this.world.height);
 
-        // Create an object that will use the bitmap as a texture
-        // var lightSprite = this.game.add.image(0, 0, this.shadowTexture);
-        var lightSprite = this.game.add.image(0, 600, this.shadowTexture);
-        // var lightSprite = this.game.add.image(900, 600, this.shadowTexture);
+        // Create objectS that will use the bitmap as a texture
+        // the coordinates define where the textures will appear in the game world
+        var lightSprite = this.game.add.image(0, 0, this.shadowTexture);
+        
 
          // Set the blend mode to MULTIPLY. This will darken the colors of
         // everything below this sprite.
         lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
+       
 
         
 
@@ -283,25 +284,28 @@ $(document).ready(function() {
             
             // This function updates the shadow texture (this.shadowTexture).
             // First, it fills the entire texture with a dark shadow color.
-            // Then it draws a white circle centered on the pointer position.
+            // Then it draws a white circle
             // Because the texture is drawn to the screen using the MULTIPLY
             // blend mode, the dark areas of the texture make all of the colors
             // underneath it darker, while the white area is unaffected.
 
-            // Draw shadow
+            // Draw shadow THIS IS WHAT defines THE SIZE OF THE SHADOW AREAS, and the color of the shadow
             this.shadowTexture.context.fillStyle = 'rgb(100, 100, 100)';
-            this.shadowTexture.context.fillRect(0, 0, this.game.width, this.game.height);
+            this.shadowTexture.context.fillRect(0, 0, wizGame.phaser.world.width, wizGame.phaser.world.height);
+
 
             // Draw circle of light with a soft edge
             var gradient = this.shadowTexture.context.createRadialGradient(
-                this.game.camera.x, this.game.camera.y, this.LIGHT_RADIUS * 0.75,
-                this.game.camera.x, this.camera.y, this.LIGHT_RADIUS);
+                // this.game.camera.x + 100, this.game.camera.y - 50, this.LIGHT_RADIUS * 0.75,
+                // this.game.camera.x + 100, this.game.camera.y - 50, this.LIGHT_RADIUS);
+                    wizGame.player.world.x + 16, wizGame.player.world.y + 32, this.LIGHT_RADIUS * 0.75,
+                    wizGame.player.world.x + 16, wizGame.player.world.y + 32, this.LIGHT_RADIUS);
             gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
             gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
 
             this.shadowTexture.context.beginPath();
             this.shadowTexture.context.fillStyle = gradient;
-            this.shadowTexture.context.arc(this.game.camera.x, this.game.camera.y,
+            this.shadowTexture.context.arc(wizGame.player.world.x + 16, wizGame.player.world.y + 32,
                 this.LIGHT_RADIUS, 0, Math.PI*2);
             this.shadowTexture.context.fill();
 
