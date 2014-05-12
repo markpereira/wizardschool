@@ -50,7 +50,17 @@ $(document).ready(function() {
         wizGame.phaser.load.spritesheet('baddie', wizGame.imgPath + 'baddie.png', 32, 32);
         wizGame.phaser.load.spritesheet('explosion', wizGame.imgPath + 'explode.png', 128, 128);
         wizGame.phaser.load.spritesheet('butterfly', wizGame.imgPath + 'butterfly2.png', 70, 65);
-        wizGame.phaser.load.spritesheet('butterflyJoel', wizGame.imgPath + 'butterfly.png', 80, 80);
+        wizGame.phaser.load.spritesheet('butterflyJoel', wizGame.imgPath + 'butterfly.png', 80, 80); //Joel's NPC Sprite
+        wizGame.phaser.load.spritesheet('butterflyErik', wizGame.imgPath + 'butterfly.png', 80, 80); // Erik's NPC Sprite
+        wizGame.phaser.load.spritesheet('butterflyMark', wizGame.imgPath + 'butterfly.png', 80, 80); // Mark's NPC Sprite
+        wizGame.phaser.load.spritesheet('butterflySimon', wizGame.imgPath + 'butterfly.png', 80, 80); // Simon's NPC Sprite
+        wizGame.phaser.load.spritesheet('butterflyNix', wizGame.imgPath + 'butterfly.png', 80, 80); // Nix's NPC Sprite
+        wizGame.phaser.load.spritesheet('butterflyAnne', wizGame.imgPath + 'butterfly.png', 80, 80); // Anne's NPC Sprite
+        wizGame.phaser.load.spritesheet('butterflyCharlie', wizGame.imgPath + 'butterfly.png', 80, 80); // Charlie's NPC Sprite
+        wizGame.phaser.load.spritesheet('butterflyKriss', wizGame.imgPath + 'butterfly.png', 80, 80); // Kriss's NPC Sprite
+        wizGame.phaser.load.spritesheet('butterflyOlly', wizGame.imgPath + 'butterfly.png', 80, 80); // Olly's NPC Sprite
+        wizGame.phaser.load.spritesheet('butterflyTom', wizGame.imgPath + 'butterfly.png', 80, 80); // Tom's NPC Sprite
+        wizGame.phaser.load.spritesheet('butterflyMathilda', wizGame.imgPath + 'butterfly.png', 80, 80); // Mathilda's NPC Sprite
     }
 
     var player;
@@ -61,6 +71,16 @@ $(document).ready(function() {
     var enemies;
     var ledge;
     var butterflyJoel;
+    var butterflyErik;
+    var butterflyMark;
+    var butterflySimon;
+    var butterflyNix;
+    var butterflyAnne;
+    var butterflyCharlie;
+    var butterflyKriss;
+    var butterflyOlly;
+    var butterflyTom;
+    var butterflyMathilda;
     var roof;
             
     //here we set two more vars
@@ -153,18 +173,126 @@ $(document).ready(function() {
         butterflies.callAll('animations.add', 'animations', 'fly', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 10, true)
         butterflies.callAll('animations.play', 'animations', 'fly');
 
-        // create special easter egg butterfly
-        butterflyJoel = game.add.sprite(250, 1050, 'butterflyJoel');
+// <<===========================================================================================================>> 
+
+                        //Create NPC for WDI students - START
+// <<===========================================================================================================>>
+
+        // Joel butterfly =====
+        butterflyJoel = game.add.sprite(250, 1050, 'butterflyJoel'); // placement of butterfly on canvas
         game.physics.arcade.enable(butterflyJoel);
         butterflyJoel.enableBody = true;
         butterflyJoel.body.immovable = true;
-        // Full opacity so it's invisible
-        // butterflyJoel.alpha = 0.01;
-
-       
+        // Full opacity so it's invisible // << DO WE NEED TO REMOVE THIS?
+        // butterflyJoel.alpha = 0.01; // << DO WE NEED TO REMOVE THIS?
         butterflyJoel.animations.add('flutter', [0, 1, 2, 3], 10, true);
         butterflyJoel.animations.play('flutter');
+
+        // Erik butterfly =====
+        butterflyErik = game.add.sprite(250, 950, 'butterflyErik');
+        game.physics.arcade.enable(butterflyErik);
+        butterflyErik.enableBody = true;
+        butterflyErik.body.immovable = true;
+        // Full opacity so it's invisible // << DO WE NEED TO REMOVE THIS?
+        // butterflyErik.alpha = 0.01; // << DO WE NEED TO REMOVE THIS?
+        butterflyErik.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        butterflyErik.animations.play('flutter');
+
+        // Mark butterfly =====
+        butterflyMark = game.add.sprite(250, 850, 'butterflyMark');
+        game.physics.arcade.enable(butterflyMark);
+        butterflyMark.enableBody = true;
+        butterflyMark.body.immovable = true;
+        // butterfly animate
+        butterflyMark.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        butterflyMark.animations.play('flutter');
+        //
+
+        // Simon butterfly =====
+        butterflySimon = game.add.sprite(250, 750, 'butterflySimon');
+        game.physics.arcade.enable(butterflySimon);
+        butterflySimon.enableBody = true;
+        butterflySimon.body.immovable = true;
+        // butterfly animate
+        butterflySimon.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        butterflySimon.animations.play('flutter');
+        //
+
+         // Nix butterfly ======
+        butterflyNix = game.add.sprite(250, 650, 'butterflyNix');
+        game.physics.arcade.enable(butterflyNix);
+        butterflyNix.enableBody = true;
+        butterflyNix.body.immovable = true;
+        // butterfly animate
+        butterflyNix.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        butterflyNix.animations.play('flutter');
+        //
+
+         // Anne butterfly =====
+        butterflyAnne = game.add.sprite(250, 550, 'butterflyAnne');
+        game.physics.arcade.enable(butterflyAnne);
+        butterflyAnne.enableBody = true;
+        butterflyAnne.body.immovable = true;
+        // butterfly animate
+        butterflyAnne.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        butterflyAnne.animations.play('flutter');
+        //
+
+        // Charlie butterfly =====
+        butterflyCharlie = game.add.sprite(250, 450, 'butterflyCharlie');
+        game.physics.arcade.enable(butterflyCharlie);
+        butterflyCharlie.enableBody = true;
+        butterflyCharlie.body.immovable = true;
+        // butterfly animate
+        butterflyCharlie.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        butterflyCharlie.animations.play('flutter');
+        //
         
+        // Kriss butterfly =====
+        butterflyKriss = game.add.sprite(650, 550, 'butterflyKriss');
+        game.physics.arcade.enable(butterflyKriss);
+        butterflyKriss.enableBody = true;
+        butterflyKriss.body.immovable = true;
+        // butterfly animate
+        butterflyKriss.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        butterflyKriss.animations.play('flutter');
+        //
+
+        // Olly butterfly =====
+        butterflyOlly = game.add.sprite(650, 450, 'butterflyOlly');
+        game.physics.arcade.enable(butterflyOlly);
+        butterflyOlly.enableBody = true;
+        butterflyOlly.body.immovable = true;
+        // butterfly animate
+        butterflyOlly.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        butterflyOlly.animations.play('flutter');
+        //
+
+        // Tom butterfly =====
+        butterflyTom = game.add.sprite(650, 350, 'butterflyTom');
+        game.physics.arcade.enable(butterflyTom);
+        butterflyTom.enableBody = true;
+        butterflyTom.body.immovable = true;
+        // butterfly animate
+        butterflyTom.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        butterflyTom.animations.play('flutter');
+        //
+
+        // Mathilda butterfly =====
+        butterflyMathilda = game.add.sprite(650, 650, 'butterflyMathilda');
+        game.physics.arcade.enable(butterflyMathilda);
+        butterflyMathilda.enableBody = true;
+        butterflyMathilda.body.immovable = true;
+        // butterfly animate
+        butterflyMathilda.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        butterflyMathilda.animations.play('flutter');
+        //
+// <<===========================================================================================================>> 
+
+                        //Create NPC for WDI students - END
+// <<===========================================================================================================>>
+
+
         //CREATE ENEMIES BELOW
         enemies = game.add.group();
         enemies.enableBody = true;
@@ -270,8 +398,48 @@ $(document).ready(function() {
         //  Checks to see if the player overlaps with any of the butterflies, if he does call the collectStar function
         game.physics.arcade.overlap(player, butterflies, collectButterfly, null, this);
 
+// <<===========================================================================================================>> 
+
+                        //Create speak function when collide with WDI students - START
+// <<===========================================================================================================>> 
+
         //  Checks to see if the player overlaps with the butterflyJoel, if he does call the easterEgg function
         game.physics.arcade.overlap(player, butterflyJoel, easterEgg, lastSpoke, this);
+
+        //  Checks to see if the player overlaps with the butterflyErik, if he does call the erikSpeak function
+        game.physics.arcade.overlap(player, butterflyErik, erikSpeak, lastSpoke, this);
+
+        //  Checks to see if the player overlaps with the butterflyMark, if he does call the markSpeak function
+        game.physics.arcade.overlap(player, butterflyMark, markSpeak, lastSpoke, this);
+
+        //  Checks to see if the player overlaps with the butterflySimon, if he does call the simonSpeak function
+        game.physics.arcade.overlap(player, butterflySimon, simonSpeak, lastSpoke, this);
+
+        //  Checks to see if the player overlaps with the butterflyNix, if he does call the nixSpeak function
+        game.physics.arcade.overlap(player, butterflyNix, nixSpeak, lastSpoke, this);
+
+        //  Checks to see if the player overlaps with the butterflyAnne, if he does call the anneSpeak function
+        game.physics.arcade.overlap(player, butterflyAnne, anneSpeak, lastSpoke, this);
+
+        //  Checks to see if the player overlaps with the butterflyCharlie, if he does call the charlieSpeak function
+        game.physics.arcade.overlap(player, butterflyCharlie, charlieSpeak, lastSpoke, this);
+
+        //  Checks to see if the player overlaps with the butterflyKriss, if he does call the krissSpeak function
+        game.physics.arcade.overlap(player, butterflyKriss, krissSpeak, lastSpoke, this);
+
+        //  Checks to see if the player overlaps with the butterflyOlly, if he does call the ollySpeak function
+        game.physics.arcade.overlap(player, butterflyOlly, ollySpeak, lastSpoke, this);
+
+        //  Checks to see if the player overlaps with the butterflyTom, if he does call the tomSpeak function
+        game.physics.arcade.overlap(player, butterflyTom, tomSpeak, lastSpoke, this);
+
+        //  Checks to see if the player overlaps with the butterflyMathilda, if he does call the mathildaSpeak function
+        game.physics.arcade.overlap(player, butterflyMathilda, mathildaSpeak, lastSpoke, this);
+
+// <<===========================================================================================================>> 
+
+                        //Create speak function when collide with WDI students - END
+// <<===========================================================================================================>>
 
         // KILL PLAYER IF HE BUMPS INTO BAD GUY
         game.physics.arcade.overlap(player, enemies, killPlayer, null, this);
@@ -394,13 +562,21 @@ $(document).ready(function() {
         }
     }
 
+
+
+// <<===========================================================================================================>> 
+
+                        //WDI students add comments to the array they want their NPC to speak - START
+// <<===========================================================================================================>>
+
+
     function easterEgg (player, butterflyJoel) {
     
         // Samples an array of Joel's best comments
         joelStyle = { font: "30px Arial", fill: "#fff", align: "center" };
-        var joelisms = ["\"Have the best time... seriously.\"", "\"Turn up the autism for that one.\""]
-        var joelText = game.add.text(300, 960, _.sample(joelisms), joelStyle);
-        // var joelText = game.add.text(300, 960, "\"Have the best time... seriously.\"", joelStyle);   
+        var joelisms = ["\"Have the best time... seriously.\"", "\"Turn up the autism for that one.\"", "\"It's past 9am - R.I.P.\""]
+        var joelText = game.add.text(300, 1050, _.sample(joelisms), joelStyle);
+        // var joelText = game.add.text(300, 960, "\"Have the best time... seriously.\"", joelStyle); //<< CAN THIS BE REMOVED?  
        
         // Call removeText function after a couple seconds
         setTimeout(removeText, 1500);
@@ -408,8 +584,164 @@ $(document).ready(function() {
         function removeText () {
             game.world.remove(joelText);   
         }
-
     }
+
+    function erikSpeak (player, butterflyErik) {
+    
+        // Samples an array of Erik's best comments
+        erikStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        var erikisms = ["\"Erik speaks about things.\"", "\"Erik speaks again\"", "\"Eriks words of wisdom\""]
+        var erikText = game.add.text(350, 950, _.sample(erikisms), erikStyle);
+        // var joelText = game.add.text(300, 960, "\"Have the best time... seriously.\"", joelStyle);  //<< CAN THIS BE REMOVED?
+       
+        // Call removeText function after a couple seconds 
+        setTimeout(removeText, 1500);
+
+        function removeText () {
+            game.world.remove(erikText);   
+        }
+    }
+
+    function markSpeak (player, butterflyMark) {
+    
+        // Samples an array of Mark's best comments
+        markStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        var markisms = ["\"This is Mark.\"", "\"I did the WDI course.\"", "\"Marks words of wisdom\""]
+        var markText = game.add.text(300, 850, _.sample(markisms), markStyle);  
+       
+        // Call removeText function after a couple seconds
+        setTimeout(removeText, 1500);
+
+        function removeText () {
+            game.world.remove(markText);   
+        }
+    }
+
+    function simonSpeak (player, butterflySimon) {
+    
+        // Samples an array of Simon's best comments
+        simonStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        var simonisms = ["\"This is Simon.\"", "\"I did the WDI course.\"", "\"Simons words of wisdom\""]
+        var simonText = game.add.text(300, 800, _.sample(simonisms), simonStyle);  
+       
+        // Call removeText function after a couple seconds
+        setTimeout(removeText, 1500);
+
+        function removeText () {
+            game.world.remove(simonText);   
+        }
+    }
+
+     function nixSpeak (player, butterflyNix) {
+    
+        // Samples an array of Nix's best comments
+        nixStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        var nixisms = ["\"This is Nix.\"", "\"I did the WDI course.\"", "\"Nixs words of wisdom\""]
+        var nixText = game.add.text(300, 700, _.sample(nixisms), nixStyle);  
+       
+        // Call removeText function after a couple seconds
+        setTimeout(removeText, 1500);
+
+        function removeText () {
+            game.world.remove(nixText);   
+        }
+    }
+
+    function anneSpeak (player, butterflyAnne) {
+    
+        // Samples an array of Anne's best comments
+        anneStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        var anneisms = ["\"This is Anne.\"", "\"I did the WDI course.\"", "\"Annes words of wisdom\""]
+        var anneText = game.add.text(300, 600, _.sample(anneisms), anneStyle);  
+       
+        // Call removeText function after a couple seconds
+        setTimeout(removeText, 1500);
+
+        function removeText () {
+            game.world.remove(anneText);   
+        }
+    }
+
+    function charlieSpeak (player, butterflyCharlie) {
+    
+        // Samples an array of Charlie's best comments
+        charlieStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        var charlieisms = ["\"This is Charlie.\"", "\"I did the WDI course.\"", "\"Charlies words of wisdom\""]
+        var charlieText = game.add.text(300, 500, _.sample(charlieisms), charlieStyle);  
+       
+        // Call removeText function after a couple seconds
+        setTimeout(removeText, 1500);
+
+        function removeText () {
+            game.world.remove(charlieText);   
+        }
+    }
+
+    function krissSpeak (player, butterflyKriss) {
+    
+        // Samples an array of Kriss's best comments
+        krissStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        var krissisms = ["\"This is Kriss.\"", "\"I did the WDI course.\"", "\"Kristos words of wisdom\""]
+        var krissText = game.add.text(700, 600, _.sample(krissisms), krissStyle);  
+       
+        // Call removeText function after a couple seconds
+        setTimeout(removeText, 1500);
+
+        function removeText () {
+            game.world.remove(krissText);   
+        }
+    }
+
+    function ollySpeak (player, butterflyOlly) {
+    
+        // Samples an array of Olly's best comments
+        ollyStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        var ollyisms = ["\"This is Olly.\"", "\"I did the WDI course.\"", "\"Ollys words of wisdom\""]
+        var ollyText = game.add.text(700, 500, _.sample(ollyisms), ollyStyle);  
+       
+        // Call removeText function after a couple seconds
+        setTimeout(removeText, 1500);
+
+        function removeText () {
+            game.world.remove(ollyText);   
+        }
+    }
+
+    function tomSpeak (player, butterflyTom) {
+    
+        // Samples an array of Tom's best comments
+        tomStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        var tomisms = ["\"This is Tom.\"", "\"I did the WDI course.\"", "\"Toms words of wisdom\""]
+        var tomText = game.add.text(700, 400, _.sample(tomisms), tomStyle);  
+       
+        // Call removeText function after a couple seconds
+        setTimeout(removeText, 1500);
+
+        function removeText () {
+            game.world.remove(tomText);   
+        }
+    }
+
+    function mathildaSpeak (player, butterflyMathilda) {
+
+        // Samples an array of Mathilda's best comments
+        mathildaStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        var mathildaisms = ["\"This is Mathilda.\"", "\"I teach the WDI course.\"", "\"Mathildas words of wisdom\""]
+        var mathildaText = game.add.text(700, 700, _.sample(mathildaisms), mathildaStyle);  
+       
+        // Call removeText function after a couple seconds
+        setTimeout(removeText, 1500);
+
+        function removeText () {
+            game.world.remove(mathildaText);   
+        }
+    }
+
+// <<===========================================================================================================>> 
+
+                        //WDI students add comments to the array they want their NPC to speak - END
+// <<===========================================================================================================>>
+
 
     function collectButterfly (player, butterfly) {
         
