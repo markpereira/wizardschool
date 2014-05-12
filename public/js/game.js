@@ -87,24 +87,6 @@ $(document).ready(function() {
         //  We will enable physics for any object that is created in this group
         platforms.enableBody = true;
 
-        // The radius of the circle of light
-        this.LIGHT_RADIUS = 100;
-   
-        // Create the shadow texture
-        this.shadowTexture = this.game.add.bitmapData(this.world.width, this.world.height);
-
-        // Create objectS that will use the bitmap as a texture
-        // the coordinates define where the textures will appear in the game world
-        var lightSprite = this.game.add.image(0, 0, this.shadowTexture);
-        
-
-         // Set the blend mode to MULTIPLY. This will darken the colors of
-        // everything below this sprite.
-        lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
-       
-
-        
-
         // Here we create the long ledges
         var longledge_coords = {
             1500: 970,
@@ -179,9 +161,6 @@ $(document).ready(function() {
         // Full opacity so it's invisible
         // butterflyJoel.alpha = 0.01;
 
-        //------------
-        // ANIMATIONS
-        //------------
        
         butterflyJoel.animations.add('flutter', [0, 1, 2, 3], 10, true);
         butterflyJoel.animations.play('flutter');
@@ -209,10 +188,32 @@ $(document).ready(function() {
             baddies.callAll('animations.add', 'animations', 'right', [2, 3], 10, true);   
 
         }
+        enemiesRight();
+         
+        // ---------------------------------------------------------
+        // SHADOW AND TORCHLIGHT BELOW
+        // ----------------------------------------------------------
+        
+         // The radius of the circle of light
+        this.LIGHT_RADIUS = 100;
+   
+        // Create the shadow texture
+        this.shadowTexture = this.game.add.bitmapData(this.world.width, this.world.height);
+
+        // Create objectS that will use the bitmap as a texture
+        // the coordinates define where the textures will appear in the game world
+        var lightSprite = this.game.add.image(0, 0, this.shadowTexture);
+        
+
+         // Set the blend mode to MULTIPLY. This will darken the colors of
+        // everything below this sprite.
+        lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
 
         // These functions animate the enemies
-       enemiesRight();
-    
+       
+        //------------
+        // ANIMATIONS
+        //------------
         function enemiesRight(){
             var tween = game.add.tween(enemies).to( { x: 40 }, 2000, Phaser.Easing.Sinusoidal.InOut, true, 0, Number.MAX_VALUE, true);
 
