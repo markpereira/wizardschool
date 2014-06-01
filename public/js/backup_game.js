@@ -39,6 +39,7 @@ $(document).ready(function() {
         wizGame.phaser.add.text(200, 380, 'and take them to the house', { font: '20px "Press Start 2P"', fill: '#fff' });
         wizGame.phaser.add.text(200, 400, 'to learn more about ' + playerName, { font: '20px "Press Start 2P"', fill: '#fff' });
 
+        game.load.image('background', '/assets/background-V2.jpg');
         wizGame.phaser.load.spritesheet('powerup', wizGame.imgPath + 'powerup.png', 80, 74);
 
         // wizGame.phaser.load.image('ground', wizGame.imgPath + 'platform.png');
@@ -90,10 +91,13 @@ $(document).ready(function() {
     function create() {
 
         //setting the game canvas size
-        wizGame.phaser.world.setBounds(0, 0, 4800, 1200);
+        wizGame.phaser.world.setBounds(0, 0, 2200, 1650);
 
-         // Set stage background color
-        this.game.stage.backgroundColor = 0x8B7765;
+        //  A simple background for our game
+        game.add.sprite(0, 0, 'background');
+        
+        // Set stage background color
+        //this.game.stage.backgroundColor = 0x8B7765;
 
         //  We're going to be using physics, so enable the Arcade Physics system
         wizGame.phaser.physics.startSystem(Phaser.Physics.ARCADE);

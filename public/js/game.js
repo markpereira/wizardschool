@@ -29,6 +29,7 @@ $(document).ready(function() {
     
       //here we load all of the assets we need
         
+        wizGame.phaser.load.image('background', wizGame.imgPath + 'background-V2.jpg');
         wizGame.phaser.load.spritesheet('dude', wizGame.imgPath + 'eriksprite.png', 32, 60);
         var playerName = 'Erik';
         lastName = 'froese';
@@ -90,10 +91,13 @@ $(document).ready(function() {
     function create() {
 
         //setting the game canvas size
-        wizGame.phaser.world.setBounds(0, 0, 4800, 1200);
+        wizGame.phaser.world.setBounds(0, 0, 2200, 1650);
 
-         // Set stage background color
-        this.game.stage.backgroundColor = 0x8B7765;
+        //  A simple background for our game
+        game.add.sprite(0, 0, 'background');
+
+        // Set stage background color
+        //this.game.stage.backgroundColor = 0x8B7765;
 
         //  We're going to be using physics, so enable the Arcade Physics system
         wizGame.phaser.physics.startSystem(Phaser.Physics.ARCADE);
