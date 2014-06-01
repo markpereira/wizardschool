@@ -26,11 +26,13 @@ $(document).ready(function() {
     var lastName;
 
     function preload() {
-    
+        //the random number here dictates which player character is loaded.
+        var playerNum = Math.floor(Math.random()*11);
+      
       //here we load all of the assets we need
         
         wizGame.phaser.load.image('background', wizGame.imgPath + 'background-V2.jpg');
-        wizGame.phaser.load.spritesheet('player', wizGame.imgPath + 'player2.png', 32, 32);
+        wizGame.phaser.load.spritesheet('player', wizGame.imgPath + 'player' + playerNum + '.png', 32, 32);
         wizGame.phaser.load.spritesheet('powerup', wizGame.imgPath + 'powerup.png', 80, 74);   
         wizGame.phaser.load.image('reset-button', wizGame.imgPath + 'reset-button.png');
         wizGame.phaser.load.image('contact-button', wizGame.imgPath + 'contact-button.png');
