@@ -53,12 +53,10 @@ $(document).ready(function() {
     }
 
     var player;
-    var platforms;
     var cursors;
     var button;
     var butterflies;
     var enemies;
-    var ledge;
     var Joel;
     var Erik;
     var Mark;
@@ -70,7 +68,6 @@ $(document).ready(function() {
     var Olly;
     var Tom;
     var Mathilda;
-    var roof;
             
     //here we set two more vars
     var score = 0;
@@ -356,12 +353,12 @@ $(document).ready(function() {
     function update() {
 
         //  Collide the player and butterflies with the platforms
-        game.physics.arcade.collide(player, platforms);
-        game.physics.arcade.collide(butterflies, platforms);
+        // game.physics.arcade.collide(player, platforms);
+        // game.physics.arcade.collide(butterflies, platforms);
 
-        // ENEMY ADDED HERE====================
-        game.physics.arcade.collide(enemies, platforms);
-        game.physics.arcade.collide(baddies, platforms);
+        // // ENEMY ADDED HERE====================
+        // game.physics.arcade.collide(enemies, platforms);
+        // game.physics.arcade.collide(baddies, platforms);
 
         //  Checks to see if the player overlaps with any of the butterflies, if he does call the collectStar function
         game.physics.arcade.overlap(player, butterflies, collectButterfly, null, this);
