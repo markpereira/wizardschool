@@ -30,22 +30,8 @@ $(document).ready(function() {
       //here we load all of the assets we need
         
         wizGame.phaser.load.image('background', wizGame.imgPath + 'background-V2.jpg');
-        wizGame.phaser.load.spritesheet('player', wizGame.imgPath + 'player.png', 32, 32);
-        //var playerName = 'Erik';
-        //lastName = 'froese';
-       
-
-        // wizGame.phaser.add.text(200, 280, 'Loading...', { font: '20px "Press Start 2P"', fill: '#fff' });
-        // wizGame.phaser.add.text(200, 360, 'Collect the seven butterflies', { font: '20px "Press Start 2P"', fill: '#fff' });
-        // wizGame.phaser.add.text(200, 380, 'and take them to the house', { font: '20px "Press Start 2P"', fill: '#fff' });
-        // wizGame.phaser.add.text(200, 400, 'to learn more about ' + playerName, { font: '20px "Press Start 2P"', fill: '#fff' });
-
-        wizGame.phaser.load.spritesheet('powerup', wizGame.imgPath + 'powerup.png', 80, 74);
-
-        // wizGame.phaser.load.image('ground', wizGame.imgPath + 'platform.png');
-        
-        wizGame.phaser.load.image('longledge', wizGame.imgPath + 'longledge.png');
-       
+        wizGame.phaser.load.spritesheet('player', wizGame.imgPath + 'player2.png', 32, 32);
+        wizGame.phaser.load.spritesheet('powerup', wizGame.imgPath + 'powerup.png', 80, 74);   
         wizGame.phaser.load.image('reset-button', wizGame.imgPath + 'reset-button.png');
         wizGame.phaser.load.image('contact-button', wizGame.imgPath + 'contact-button.png');
         wizGame.phaser.load.spritesheet('baddie', wizGame.imgPath + 'baddie.png', 32, 32);
@@ -105,32 +91,6 @@ $(document).ready(function() {
         // this keeps track of the last time an NPC 'spoke'
         this.LAST_SPOKE = 0;
 
-        //  The platforms group contains the ground and the 2 ledges we can jump on
-        platforms = wizGame.phaser.add.group();
-
-        //  We will enable physics for any object that is created in this group
-        platforms.enableBody = true;
-
-        // Here we create the long ledges
-        var longledge_coords = {
-            1500: 970,
-            1800: 970,
-            2100: 970
-        }
-        for (var key in longledge_coords) {
-            var ledge = platforms.create( parseInt(key), longledge_coords[key], 'longledge');
-            ledge.body.immovable = true;  
-        }
-
-         // Here we create the ground.
-        var ground = platforms.create(0, game.world.height - 64, 'ground');
-
-        //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-        ground.scale.setTo(12, 2);
-
-        //  This stops it from falling away when you jump on it
-        ground.body.immovable = true;
-
         // The player and its settings
         player = game.add.sprite(200, game.world.height - 150, 'player');
 
@@ -143,7 +103,7 @@ $(document).ready(function() {
         //  Player physics properties.
         player.body.collideWorldBounds = true;
 
-        //  Our two animations, walking left and right.
+        //  animations add.
         player.animations.add('left', [3, 4, 5], 10, true);
         player.animations.add('right', [6, 7, 8], 10, true);
         player.animations.add('up', [9, 10, 11], 10, true);
@@ -496,29 +456,29 @@ $(document).ready(function() {
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
 
+        //=========================
+        //PLAYER MOVEMENT WITH KEYS
+        //=========================
+
         if (cursors.left.isDown) {
-            //  Move to the left
             player.body.velocity.x = -200;
             player.animations.play('left');
             
         } else if (cursors.right.isDown) {
-            //  Move to the right
             player.body.velocity.x = 200;
             player.animations.play('right');
-        } else {
-            //  Stand still
-            player.animations.stop();
-            player.frame = 0;
-        }
-        
-        //  Allow the player to move up / down
-        if (cursors.up.isDown) {
+        } else if (cursors.up.isDown) {
             player.body.velocity.y = -200;
             player.animations.play('up');
         } else if (cursors.down.isDown) {
             player.body.velocity.y = 200;
             player.animations.play('down');
+        } else {
+            //  Stand still
+            player.animations.stop();
+            player.frame = 1;
         }
+     
 
         //--------------------------------------
         // PLAYER MOVEMENT WITH MOUSE
