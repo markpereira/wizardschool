@@ -30,15 +30,15 @@ $(document).ready(function() {
       //here we load all of the assets we need
         
         wizGame.phaser.load.image('background', wizGame.imgPath + 'background-V2.jpg');
-        wizGame.phaser.load.spritesheet('dude', wizGame.imgPath + 'eriksprite.png', 32, 60);
-        var playerName = 'Erik';
-        lastName = 'froese';
+        wizGame.phaser.load.spritesheet('player', wizGame.imgPath + 'eriksprite.png', 32, 60);
+        //var playerName = 'Erik';
+        //lastName = 'froese';
        
 
-        wizGame.phaser.add.text(200, 280, 'Loading...', { font: '20px "Press Start 2P"', fill: '#fff' });
-        wizGame.phaser.add.text(200, 360, 'Collect the seven butterflies', { font: '20px "Press Start 2P"', fill: '#fff' });
-        wizGame.phaser.add.text(200, 380, 'and take them to the house', { font: '20px "Press Start 2P"', fill: '#fff' });
-        wizGame.phaser.add.text(200, 400, 'to learn more about ' + playerName, { font: '20px "Press Start 2P"', fill: '#fff' });
+        // wizGame.phaser.add.text(200, 280, 'Loading...', { font: '20px "Press Start 2P"', fill: '#fff' });
+        // wizGame.phaser.add.text(200, 360, 'Collect the seven butterflies', { font: '20px "Press Start 2P"', fill: '#fff' });
+        // wizGame.phaser.add.text(200, 380, 'and take them to the house', { font: '20px "Press Start 2P"', fill: '#fff' });
+        // wizGame.phaser.add.text(200, 400, 'to learn more about ' + playerName, { font: '20px "Press Start 2P"', fill: '#fff' });
 
         wizGame.phaser.load.spritesheet('powerup', wizGame.imgPath + 'powerup.png', 80, 74);
 
@@ -51,17 +51,17 @@ $(document).ready(function() {
         wizGame.phaser.load.spritesheet('baddie', wizGame.imgPath + 'baddie.png', 32, 32);
         wizGame.phaser.load.spritesheet('explosion', wizGame.imgPath + 'explode.png', 128, 128);
         wizGame.phaser.load.spritesheet('butterfly', wizGame.imgPath + 'butterfly2.png', 70, 65);
-        wizGame.phaser.load.spritesheet('butterflyJoel', wizGame.imgPath + 'butterfly.png', 80, 80); //Joel's NPC Sprite
-        wizGame.phaser.load.spritesheet('butterflyErik', wizGame.imgPath + 'butterfly.png', 80, 80); // Erik's NPC Sprite
-        wizGame.phaser.load.spritesheet('butterflyMark', wizGame.imgPath + 'butterfly.png', 80, 80); // Mark's NPC Sprite
-        wizGame.phaser.load.spritesheet('butterflySimon', wizGame.imgPath + 'butterfly.png', 80, 80); // Simon's NPC Sprite
-        wizGame.phaser.load.spritesheet('butterflyNix', wizGame.imgPath + 'butterfly.png', 80, 80); // Nix's NPC Sprite
-        wizGame.phaser.load.spritesheet('butterflyAnne', wizGame.imgPath + 'butterfly.png', 80, 80); // Anne's NPC Sprite
-        wizGame.phaser.load.spritesheet('butterflyCharlie', wizGame.imgPath + 'butterfly.png', 80, 80); // Charlie's NPC Sprite
-        wizGame.phaser.load.spritesheet('butterflyKriss', wizGame.imgPath + 'butterfly.png', 80, 80); // Kriss's NPC Sprite
-        wizGame.phaser.load.spritesheet('butterflyOlly', wizGame.imgPath + 'butterfly.png', 80, 80); // Olly's NPC Sprite
-        wizGame.phaser.load.spritesheet('butterflyTom', wizGame.imgPath + 'butterfly.png', 80, 80); // Tom's NPC Sprite
-        wizGame.phaser.load.spritesheet('butterflyMathilda', wizGame.imgPath + 'butterfly.png', 80, 80); // Mathilda's NPC Sprite
+        wizGame.phaser.load.spritesheet('Joel', wizGame.imgPath + 'butterfly.png', 80, 80); //Joel's NPC Sprite
+        wizGame.phaser.load.spritesheet('Erik', wizGame.imgPath + 'eriksprite.png', 32, 60); // Erik's NPC Sprite
+        wizGame.phaser.load.spritesheet('Mark', wizGame.imgPath + 'butterfly.png', 80, 80); // Mark's NPC Sprite
+        wizGame.phaser.load.spritesheet('Simon', wizGame.imgPath + 'butterfly.png', 80, 80); // Simon's NPC Sprite
+        wizGame.phaser.load.spritesheet('Nix', wizGame.imgPath + 'butterfly.png', 80, 80); // Nix's NPC Sprite
+        wizGame.phaser.load.spritesheet('Anne', wizGame.imgPath + 'butterfly.png', 80, 80); // Anne's NPC Sprite
+        wizGame.phaser.load.spritesheet('Charlie', wizGame.imgPath + 'butterfly.png', 80, 80); // Charlie's NPC Sprite
+        wizGame.phaser.load.spritesheet('Kriss', wizGame.imgPath + 'butterfly.png', 80, 80); // Kriss's NPC Sprite
+        wizGame.phaser.load.spritesheet('Olly', wizGame.imgPath + 'butterfly.png', 80, 80); // Olly's NPC Sprite
+        wizGame.phaser.load.spritesheet('Tom', wizGame.imgPath + 'butterfly.png', 80, 80); // Tom's NPC Sprite
+        wizGame.phaser.load.spritesheet('Mathilda', wizGame.imgPath + 'butterfly.png', 80, 80); // Mathilda's NPC Sprite
     }
 
     var player;
@@ -71,17 +71,17 @@ $(document).ready(function() {
     var butterflies;
     var enemies;
     var ledge;
-    var butterflyJoel;
-    var butterflyErik;
-    var butterflyMark;
-    var butterflySimon;
-    var butterflyNix;
-    var butterflyAnne;
-    var butterflyCharlie;
-    var butterflyKriss;
-    var butterflyOlly;
-    var butterflyTom;
-    var butterflyMathilda;
+    var Joel;
+    var Erik;
+    var Mark;
+    var Simon;
+    var Nix;
+    var Anne;
+    var Charlie;
+    var Kriss;
+    var Olly;
+    var Tom;
+    var Mathilda;
     var roof;
             
     //here we set two more vars
@@ -132,9 +132,9 @@ $(document).ready(function() {
         ground.body.immovable = true;
 
         // The player and its settings
-        player = game.add.sprite(200, game.world.height - 150, 'dude');
+        player = game.add.sprite(200, game.world.height - 150, 'player');
 
-        //temporary hack to allow access to the player outside of document ready
+        //temporary hack to allow access to the plae of document ready
         wizGame.player = player;
 
         //  enable physics on the player
@@ -182,114 +182,114 @@ $(document).ready(function() {
                         //Create NPC for WDI students - START
 // <<===========================================================================================================>>
 
-        // Joel butterfly =====
-        butterflyJoel = game.add.sprite(250, 1050, 'butterflyJoel'); // placement of butterfly on canvas
-        game.physics.arcade.enable(butterflyJoel);
-        butterflyJoel.enableBody = true;
-        butterflyJoel.body.immovable = true;
+        // Joel =====
+        Joel = game.add.sprite(250, 1050, 'Joel'); // placement of butterfly on canvas
+        game.physics.arcade.enable(Joel);
+        Joel.enableBody = true;
+        Joel.body.immovable = true;
         // Full opacity so it's invisible // << DO WE NEED TO REMOVE THIS?
         // butterflyJoel.alpha = 0.01; // << DO WE NEED TO REMOVE THIS?
-        butterflyJoel.animations.add('flutter', [0, 1, 2, 3], 10, true);
-        butterflyJoel.animations.play('flutter');
+        // butterflyJoel.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        // butterflyJoel.animations.play('flutter');
 
-        // Erik butterfly =====
-        butterflyErik = game.add.sprite(250, 950, 'butterflyErik');
-        game.physics.arcade.enable(butterflyErik);
-        butterflyErik.enableBody = true;
-        butterflyErik.body.immovable = true;
+        // Erik =====
+        Erik = game.add.sprite(250, 950, 'Erik');
+        game.physics.arcade.enable(Erik);
+        Erik.enableBody = true;
+        Erik.body.immovable = true;
         // Full opacity so it's invisible // << DO WE NEED TO REMOVE THIS?
         // butterflyErik.alpha = 0.01; // << DO WE NEED TO REMOVE THIS?
-        butterflyErik.animations.add('flutter', [0, 1, 2, 3], 10, true);
-        butterflyErik.animations.play('flutter');
+        // butterflyErik.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        // butterflyErik.animations.play('flutter');
 
         // Mark butterfly =====
-        butterflyMark = game.add.sprite(250, 850, 'butterflyMark');
-        game.physics.arcade.enable(butterflyMark);
-        butterflyMark.enableBody = true;
-        butterflyMark.body.immovable = true;
+        Mark = game.add.sprite(250, 850, 'Mark');
+        game.physics.arcade.enable(Mark);
+        Mark.enableBody = true;
+        Mark.body.immovable = true;
         // butterfly animate
-        butterflyMark.animations.add('flutter', [0, 1, 2, 3], 10, true);
-        butterflyMark.animations.play('flutter');
+        // butterflyMark.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        // butterflyMark.animations.play('flutter');
         //
 
-        // Simon butterfly =====
-        butterflySimon = game.add.sprite(250, 750, 'butterflySimon');
-        game.physics.arcade.enable(butterflySimon);
-        butterflySimon.enableBody = true;
-        butterflySimon.body.immovable = true;
+        // Simon  =====
+        Simon = game.add.sprite(250, 750, 'Simon');
+        game.physics.arcade.enable(Simon);
+        Simon.enableBody = true;
+        Simon.body.immovable = true;
         // butterfly animate
-        butterflySimon.animations.add('flutter', [0, 1, 2, 3], 10, true);
-        butterflySimon.animations.play('flutter');
+        // butterflySimon.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        // butterflySimon.animations.play('flutter');
         //
 
-         // Nix butterfly ======
-        butterflyNix = game.add.sprite(250, 650, 'butterflyNix');
-        game.physics.arcade.enable(butterflyNix);
-        butterflyNix.enableBody = true;
-        butterflyNix.body.immovable = true;
+         // Nix  ======
+        Nix = game.add.sprite(250, 650, 'Nix');
+        game.physics.arcade.enable(Nix);
+        Nix.enableBody = true;
+        Nix.body.immovable = true;
         // butterfly animate
-        butterflyNix.animations.add('flutter', [0, 1, 2, 3], 10, true);
-        butterflyNix.animations.play('flutter');
+        // butterflyNix.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        // butterflyNix.animations.play('flutter');
         //
 
-         // Anne butterfly =====
-        butterflyAnne = game.add.sprite(250, 550, 'butterflyAnne');
-        game.physics.arcade.enable(butterflyAnne);
-        butterflyAnne.enableBody = true;
-        butterflyAnne.body.immovable = true;
+         // Anne  =====
+        Anne = game.add.sprite(250, 550, 'Anne');
+        game.physics.arcade.enable(Anne);
+        Anne.enableBody = true;
+        Anne.body.immovable = true;
         // butterfly animate
-        butterflyAnne.animations.add('flutter', [0, 1, 2, 3], 10, true);
-        butterflyAnne.animations.play('flutter');
+        // butterflyAnne.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        // butterflyAnne.animations.play('flutter');
         //
 
-        // Charlie butterfly =====
-        butterflyCharlie = game.add.sprite(250, 450, 'butterflyCharlie');
-        game.physics.arcade.enable(butterflyCharlie);
-        butterflyCharlie.enableBody = true;
-        butterflyCharlie.body.immovable = true;
+        // Charlie  =====
+        Charlie = game.add.sprite(250, 450, 'Charlie');
+        game.physics.arcade.enable(Charlie);
+        Charlie.enableBody = true;
+        Charlie.body.immovable = true;
         // butterfly animate
-        butterflyCharlie.animations.add('flutter', [0, 1, 2, 3], 10, true);
-        butterflyCharlie.animations.play('flutter');
+        // butterflyCharlie.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        // butterflyCharlie.animations.play('flutter');
         //
         
-        // Kriss butterfly =====
-        butterflyKriss = game.add.sprite(650, 550, 'butterflyKriss');
-        game.physics.arcade.enable(butterflyKriss);
-        butterflyKriss.enableBody = true;
-        butterflyKriss.body.immovable = true;
+        // Kriss  =====
+        Kriss = game.add.sprite(650, 550, 'Kriss');
+        game.physics.arcade.enable(Kriss);
+        Kriss.enableBody = true;
+        Kriss.body.immovable = true;
         // butterfly animate
-        butterflyKriss.animations.add('flutter', [0, 1, 2, 3], 10, true);
-        butterflyKriss.animations.play('flutter');
+        // butterflyKriss.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        // butterflyKriss.animations.play('flutter');
         //
 
-        // Olly butterfly =====
-        butterflyOlly = game.add.sprite(650, 450, 'butterflyOlly');
-        game.physics.arcade.enable(butterflyOlly);
-        butterflyOlly.enableBody = true;
-        butterflyOlly.body.immovable = true;
+        // Olly  =====
+        Olly = game.add.sprite(650, 450, 'Olly');
+        game.physics.arcade.enable(Olly);
+        Olly.enableBody = true;
+        Olly.body.immovable = true;
         // butterfly animate
-        butterflyOlly.animations.add('flutter', [0, 1, 2, 3], 10, true);
-        butterflyOlly.animations.play('flutter');
+        // butterflyOlly.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        // butterflyOlly.animations.play('flutter');
         //
 
-        // Tom butterfly =====
-        butterflyTom = game.add.sprite(650, 350, 'butterflyTom');
-        game.physics.arcade.enable(butterflyTom);
-        butterflyTom.enableBody = true;
-        butterflyTom.body.immovable = true;
+        // Tom  =====
+        Tom = game.add.sprite(650, 350, 'Tom');
+        game.physics.arcade.enable(Tom);
+        Tom.enableBody = true;
+        Tom.body.immovable = true;
         // butterfly animate
-        butterflyTom.animations.add('flutter', [0, 1, 2, 3], 10, true);
-        butterflyTom.animations.play('flutter');
+        // butterflyTom.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        // butterflyTom.animations.play('flutter');
         //
 
         // Mathilda butterfly =====
-        butterflyMathilda = game.add.sprite(650, 650, 'butterflyMathilda');
-        game.physics.arcade.enable(butterflyMathilda);
-        butterflyMathilda.enableBody = true;
-        butterflyMathilda.body.immovable = true;
+        Mathilda = game.add.sprite(650, 650, 'Mathilda');
+        game.physics.arcade.enable(Mathilda);
+        Mathilda.enableBody = true;
+        Mathilda.body.immovable = true;
         // butterfly animate
-        butterflyMathilda.animations.add('flutter', [0, 1, 2, 3], 10, true);
-        butterflyMathilda.animations.play('flutter');
+        // butterflyMathilda.animations.add('flutter', [0, 1, 2, 3], 10, true);
+        // butterflyMathilda.animations.play('flutter');
         //
 // <<===========================================================================================================>> 
 
@@ -327,7 +327,7 @@ $(document).ready(function() {
         // ----------------------------------------------------------
         
          // The radius of the circle of light
-        this.LIGHT_RADIUS = 100;
+        this.LIGHT_RADIUS = 200;
    
         // Create the shadow texture
         this.shadowTexture = this.game.add.bitmapData(this.world.width, this.world.height);
@@ -408,37 +408,37 @@ $(document).ready(function() {
 // <<===========================================================================================================>> 
 
         //  Checks to see if the player overlaps with the butterflyJoel, if he does call the easterEgg function
-        game.physics.arcade.overlap(player, butterflyJoel, easterEgg, lastSpoke, this);
+        game.physics.arcade.overlap(player, Joel, easterEgg, lastSpoke, this);
 
         //  Checks to see if the player overlaps with the butterflyErik, if he does call the erikSpeak function
-        game.physics.arcade.overlap(player, butterflyErik, erikSpeak, lastSpoke, this);
+        game.physics.arcade.overlap(player, Erik, erikSpeak, lastSpoke, this);
 
         //  Checks to see if the player overlaps with the butterflyMark, if he does call the markSpeak function
-        game.physics.arcade.overlap(player, butterflyMark, markSpeak, lastSpoke, this);
+        game.physics.arcade.overlap(player, Mark, markSpeak, lastSpoke, this);
 
         //  Checks to see if the player overlaps with the butterflySimon, if he does call the simonSpeak function
-        game.physics.arcade.overlap(player, butterflySimon, simonSpeak, lastSpoke, this);
+        game.physics.arcade.overlap(player, Simon, simonSpeak, lastSpoke, this);
 
         //  Checks to see if the player overlaps with the butterflyNix, if he does call the nixSpeak function
-        game.physics.arcade.overlap(player, butterflyNix, nixSpeak, lastSpoke, this);
+        game.physics.arcade.overlap(player, Nix, nixSpeak, lastSpoke, this);
 
         //  Checks to see if the player overlaps with the butterflyAnne, if he does call the anneSpeak function
-        game.physics.arcade.overlap(player, butterflyAnne, anneSpeak, lastSpoke, this);
+        game.physics.arcade.overlap(player, Anne, anneSpeak, lastSpoke, this);
 
         //  Checks to see if the player overlaps with the butterflyCharlie, if he does call the charlieSpeak function
-        game.physics.arcade.overlap(player, butterflyCharlie, charlieSpeak, lastSpoke, this);
+        game.physics.arcade.overlap(player, Charlie, charlieSpeak, lastSpoke, this);
 
         //  Checks to see if the player overlaps with the butterflyKriss, if he does call the krissSpeak function
-        game.physics.arcade.overlap(player, butterflyKriss, krissSpeak, lastSpoke, this);
+        game.physics.arcade.overlap(player, Kriss, krissSpeak, lastSpoke, this);
 
         //  Checks to see if the player overlaps with the butterflyOlly, if he does call the ollySpeak function
-        game.physics.arcade.overlap(player, butterflyOlly, ollySpeak, lastSpoke, this);
+        game.physics.arcade.overlap(player, Olly, ollySpeak, lastSpoke, this);
 
         //  Checks to see if the player overlaps with the butterflyTom, if he does call the tomSpeak function
-        game.physics.arcade.overlap(player, butterflyTom, tomSpeak, lastSpoke, this);
+        game.physics.arcade.overlap(player, Tom, tomSpeak, lastSpoke, this);
 
         //  Checks to see if the player overlaps with the butterflyMathilda, if he does call the mathildaSpeak function
-        game.physics.arcade.overlap(player, butterflyMathilda, mathildaSpeak, lastSpoke, this);
+        game.physics.arcade.overlap(player, Mathilda, mathildaSpeak, lastSpoke, this);
 
 // <<===========================================================================================================>> 
 
@@ -574,7 +574,7 @@ $(document).ready(function() {
 // <<===========================================================================================================>>
 
 
-    function easterEgg (player, butterflyJoel) {
+    function easterEgg (player, Joel) {
     
         // Samples an array of Joel's best comments
         joelStyle = { font: "30px Arial", fill: "#fff", align: "center" };
@@ -590,7 +590,7 @@ $(document).ready(function() {
         }
     }
 
-    function erikSpeak (player, butterflyErik) {
+    function erikSpeak (player, Erik) {
     
         // Samples an array of Erik's best comments
         erikStyle = { font: "30px Arial", fill: "#fff", align: "center" };
@@ -606,7 +606,7 @@ $(document).ready(function() {
         }
     }
 
-    function markSpeak (player, butterflyMark) {
+    function markSpeak (player, Mark) {
     
         // Samples an array of Mark's best comments
         markStyle = { font: "30px Arial", fill: "#fff", align: "center" };
@@ -621,7 +621,7 @@ $(document).ready(function() {
         }
     }
 
-    function simonSpeak (player, butterflySimon) {
+    function simonSpeak (player, Simon) {
     
         // Samples an array of Simon's best comments
         simonStyle = { font: "30px Arial", fill: "#fff", align: "center" };
@@ -636,7 +636,7 @@ $(document).ready(function() {
         }
     }
 
-     function nixSpeak (player, butterflyNix) {
+     function nixSpeak (player, Nix) {
     
         // Samples an array of Nix's best comments
         nixStyle = { font: "30px Arial", fill: "#fff", align: "center" };
@@ -651,7 +651,7 @@ $(document).ready(function() {
         }
     }
 
-    function anneSpeak (player, butterflyAnne) {
+    function anneSpeak (player, Anne) {
     
         // Samples an array of Anne's best comments
         anneStyle = { font: "30px Arial", fill: "#fff", align: "center" };
@@ -666,7 +666,7 @@ $(document).ready(function() {
         }
     }
 
-    function charlieSpeak (player, butterflyCharlie) {
+    function charlieSpeak (player, Charlie) {
     
         // Samples an array of Charlie's best comments
         charlieStyle = { font: "30px Arial", fill: "#fff", align: "center" };
@@ -681,7 +681,7 @@ $(document).ready(function() {
         }
     }
 
-    function krissSpeak (player, butterflyKriss) {
+    function krissSpeak (player, Kriss) {
     
         // Samples an array of Kriss's best comments
         krissStyle = { font: "30px Arial", fill: "#fff", align: "center" };
@@ -696,7 +696,7 @@ $(document).ready(function() {
         }
     }
 
-    function ollySpeak (player, butterflyOlly) {
+    function ollySpeak (player, Olly) {
     
         // Samples an array of Olly's best comments
         ollyStyle = { font: "30px Arial", fill: "#fff", align: "center" };
@@ -711,7 +711,7 @@ $(document).ready(function() {
         }
     }
 
-    function tomSpeak (player, butterflyTom) {
+    function tomSpeak (player, Tom) {
     
         // Samples an array of Tom's best comments
         tomStyle = { font: "30px Arial", fill: "#fff", align: "center" };
@@ -726,7 +726,7 @@ $(document).ready(function() {
         }
     }
 
-    function mathildaSpeak (player, butterflyMathilda) {
+    function mathildaSpeak (player, Mathilda) {
 
         // Samples an array of Mathilda's best comments
         mathildaStyle = { font: "30px Arial", fill: "#fff", align: "center" };
