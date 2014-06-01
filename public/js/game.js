@@ -39,6 +39,8 @@ $(document).ready(function() {
         wizGame.phaser.load.spritesheet('baddie', wizGame.imgPath + 'baddie.png', 32, 32);
         wizGame.phaser.load.spritesheet('explosion', wizGame.imgPath + 'explode.png', 128, 128);
         wizGame.phaser.load.spritesheet('butterfly', wizGame.imgPath + 'butterfly2.png', 70, 65);
+
+        //NPC Sprits
         wizGame.phaser.load.spritesheet('Joel', wizGame.imgPath + 'butterfly.png', 80, 80); //Joel's NPC Sprite
         wizGame.phaser.load.spritesheet('Erik', wizGame.imgPath + 'eriksprite.png', 32, 60); // Erik's NPC Sprite
         wizGame.phaser.load.spritesheet('Mark', wizGame.imgPath + 'butterfly.png', 80, 80); // Mark's NPC Sprite
@@ -50,6 +52,8 @@ $(document).ready(function() {
         wizGame.phaser.load.spritesheet('Olly', wizGame.imgPath + 'butterfly.png', 80, 80); // Olly's NPC Sprite
         wizGame.phaser.load.spritesheet('Tom', wizGame.imgPath + 'butterfly.png', 80, 80); // Tom's NPC Sprite
         wizGame.phaser.load.spritesheet('Mathilda', wizGame.imgPath + 'butterfly.png', 80, 80); // Mathilda's NPC Sprite
+
+        wizGame.phaser.load.spritesheet('purple-sq', wizGame.imgPath + 'purple_sq.png', 10, 10);
     }
 
     var player;
@@ -137,6 +141,29 @@ $(document).ready(function() {
         }
         butterflies.callAll('animations.add', 'animations', 'fly', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 10, true)
         butterflies.callAll('animations.play', 'animations', 'fly');
+
+// <<===========================================================================================================>> 
+                        //Create Invisible Walls
+// <<===========================================================================================================>>
+
+        wizGame.invisWalls = game.add.group();
+        wizGame.invisWalls.enableBody = true;
+
+        //make the walls invisible
+        // wizGame.invisWalls.alpha = 0;
+
+        var createInvisWall = function(posX, posY, width, height) {
+            var newWall = wizGame.invisWalls.create(posX, posY, 'purple-sq');
+            newWall.body.immovable = true;
+            newWall.scale.x = width / 10;
+            newWall.scale.y = height / 10;
+        };
+
+        //LOWER LEFT ROOM
+        createInvisWall(0, 1182, 416, 12);
+        createInvisWall(386, 1183, 30, 87);
+        createInvisWall(0, 1377, 413, 24);
+        createInvisWall(385, 1314, 31, 86);
 
 // <<===========================================================================================================>> 
 
@@ -351,6 +378,9 @@ $(document).ready(function() {
     
 
     function update() {
+
+        // enable wall collisions
+        game.physics.arcade.collide(wizGame.player, wizGame.invisWalls);
 
         //  Collide the player and butterflies with the platforms
         // game.physics.arcade.collide(player, platforms);
