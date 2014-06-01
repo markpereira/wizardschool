@@ -30,7 +30,7 @@ $(document).ready(function() {
       //here we load all of the assets we need
         
         wizGame.phaser.load.image('background', wizGame.imgPath + 'background-V2.jpg');
-        wizGame.phaser.load.spritesheet('player', wizGame.imgPath + 'eriksprite.png', 32, 60);
+        wizGame.phaser.load.spritesheet('player', wizGame.imgPath + 'player.png', 32, 32);
         //var playerName = 'Erik';
         //lastName = 'froese';
        
@@ -144,8 +144,10 @@ $(document).ready(function() {
         player.body.collideWorldBounds = true;
 
         //  Our two animations, walking left and right.
-        player.animations.add('left', [0, 1, 2, 3], 10, true);
-        player.animations.add('right', [5, 6, 7, 8], 10, true);
+        player.animations.add('left', [3, 4, 5], 10, true);
+        player.animations.add('right', [6, 7, 8], 10, true);
+        player.animations.add('up', [9, 10, 11], 10, true);
+        player.animations.add('down', [0, 1, 2], 10, true);
         
         game.camera.follow(player);
             
@@ -506,14 +508,16 @@ $(document).ready(function() {
         } else {
             //  Stand still
             player.animations.stop();
-            player.frame = 4;
+            player.frame = 0;
         }
         
         //  Allow the player to move up / down
         if (cursors.up.isDown) {
             player.body.velocity.y = -200;
+            player.animations.play('up');
         } else if (cursors.down.isDown) {
             player.body.velocity.y = 200;
+            player.animations.play('down');
         }
 
         //--------------------------------------
