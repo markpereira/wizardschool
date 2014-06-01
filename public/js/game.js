@@ -40,7 +40,7 @@ $(document).ready(function() {
         wizGame.phaser.load.spritesheet('explosion', wizGame.imgPath + 'explode.png', 128, 128);
         wizGame.phaser.load.spritesheet('butterfly', wizGame.imgPath + 'butterfly2.png', 70, 65);
         wizGame.phaser.load.spritesheet('Joel', wizGame.imgPath + 'butterfly.png', 80, 80); //Joel's NPC Sprite
-        wizGame.phaser.load.spritesheet('Erik', wizGame.imgPath + 'eriksprite.png', 32, 60); // Erik's NPC Sprite
+        wizGame.phaser.load.spritesheet('Erik', wizGame.imgPath + 'eriksprite.png', 32, 58); // Erik's NPC Sprite
         wizGame.phaser.load.spritesheet('Mark', wizGame.imgPath + 'butterfly.png', 80, 80); // Mark's NPC Sprite
         wizGame.phaser.load.spritesheet('Simon', wizGame.imgPath + 'butterfly.png', 80, 80); // Simon's NPC Sprite
         wizGame.phaser.load.spritesheet('Nix', wizGame.imgPath + 'butterfly.png', 80, 80); // Nix's NPC Sprite
@@ -158,6 +158,7 @@ $(document).ready(function() {
         game.physics.arcade.enable(Erik);
         Erik.enableBody = true;
         Erik.body.immovable = true;
+        Erik.animations.add('talk', [0, 1], 5, true);
         // Full opacity so it's invisible // << DO WE NEED TO REMOVE THIS?
         // butterflyErik.alpha = 0.01; // << DO WE NEED TO REMOVE THIS?
         // butterflyErik.animations.add('flutter', [0, 1, 2, 3], 10, true);
@@ -560,12 +561,14 @@ $(document).ready(function() {
         var erikisms = ["\"Erik speaks about things.\"", "\"Erik speaks again\"", "\"Eriks words of wisdom\""]
         var erikText = game.add.text(350, 950, _.sample(erikisms), erikStyle);
         // var joelText = game.add.text(300, 960, "\"Have the best time... seriously.\"", joelStyle);  //<< CAN THIS BE REMOVED?
-       
+        Erik.animations.play('talk');
         // Call removeText function after a couple seconds 
         setTimeout(removeText, 1500);
 
         function removeText () {
-            game.world.remove(erikText);   
+            game.world.remove(erikText);
+            Erik.animations.stop();
+            Erik.frame = 0;   
         }
     }
 
