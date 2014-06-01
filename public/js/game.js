@@ -27,7 +27,7 @@ $(document).ready(function() {
 
     function preload() {
         //the random number here dictates which player character is loaded.
-        var playerNum = Math.floor(Math.random()*11);
+        var playerNum = Math.floor(Math.random()*10);
       
       //here we load all of the assets we need
         
