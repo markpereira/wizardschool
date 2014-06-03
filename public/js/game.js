@@ -571,7 +571,7 @@ $(document).ready(function() {
     function easterEgg (player, Joel) {
     
         // Samples an array of Joel's best comments
-        joelStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        joelStyle = { font: "20px Arial", fill: "#fff", align: "center" };
         var joelisms = ["\"Have the best time... seriously.\"", "\"Turn up the autism for that one.\"", "\"It's past 9am - R.I.P.\""]
         var joelText = game.add.text(300, 1050, _.sample(joelisms), joelStyle);
         // var joelText = game.add.text(300, 960, "\"Have the best time... seriously.\"", joelStyle); //<< CAN THIS BE REMOVED?  
@@ -587,7 +587,7 @@ $(document).ready(function() {
     function erikSpeak (player, Erik) {
     
         // Samples an array of Erik's best comments
-        erikStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        erikStyle = { font: "20px Arial", fill: "#fff", align: "center" };
         var erikisms = ["\"Erik speaks about things.\"", "\"Erik speaks again\"", "\"Eriks words of wisdom\""]
         var erikText = game.add.text(350, 950, _.sample(erikisms), erikStyle);
         // var joelText = game.add.text(300, 960, "\"Have the best time... seriously.\"", joelStyle);  //<< CAN THIS BE REMOVED?
@@ -605,7 +605,7 @@ $(document).ready(function() {
     function markSpeak (player, Mark) {
     
         // Samples an array of Mark's best comments
-        markStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        markStyle = { font: "20px Arial", fill: "#fff", align: "center" };
         var markisms = ["\"This is Mark.\"", "\"I did the WDI course.\"", "\"Marks words of wisdom\""]
         var markText = game.add.text(300, 850, _.sample(markisms), markStyle);  
        
@@ -620,7 +620,7 @@ $(document).ready(function() {
     function simonSpeak (player, Simon) {
     
         // Samples an array of Simon's best comments
-        simonStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        simonStyle = { font: "20px Arial", fill: "#fff", align: "center" };
         var simonisms = ["\"This is Simon.\"", "\"I did the WDI course.\"", "\"Simons words of wisdom\""]
         var simonText = game.add.text(300, 800, _.sample(simonisms), simonStyle);  
        
@@ -635,7 +635,7 @@ $(document).ready(function() {
      function nixSpeak (player, Nix) {
     
         // Samples an array of Nix's best comments
-        nixStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        nixStyle = { font: "20px Arial", fill: "#fff", align: "center" };
         var nixisms = ["\"This is Nix.\"", "\"I did the WDI course.\"", "\"Nixs words of wisdom\""]
         var nixText = game.add.text(300, 700, _.sample(nixisms), nixStyle);  
        
@@ -650,7 +650,7 @@ $(document).ready(function() {
     function anneSpeak (player, Anne) {
     
         // Samples an array of Anne's best comments
-        anneStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        anneStyle = { font: "20px Arial", fill: "#fff", align: "center" };
         var anneisms = ["\"This is Anne.\"", "\"I did the WDI course.\"", "\"Annes words of wisdom\""]
         var anneText = game.add.text(300, 600, _.sample(anneisms), anneStyle);  
        
@@ -665,7 +665,7 @@ $(document).ready(function() {
     function charlieSpeak (player, Charlie) {
     
         // Samples an array of Charlie's best comments
-        charlieStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        charlieStyle = { font: "20px Arial", fill: "#fff", align: "center" };
         var charlieisms = ["\"This is Charlie.\"", "\"I did the WDI course.\"", "\"Charlies words of wisdom\""]
         var charlieText = game.add.text(300, 500, _.sample(charlieisms), charlieStyle);  
        
@@ -680,7 +680,7 @@ $(document).ready(function() {
     function krissSpeak (player, Kriss) {
     
         // Samples an array of Kriss's best comments
-        krissStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        krissStyle = { font: "20px Arial", fill: "#fff", align: "center" };
         var krissisms = ["\"This is Kriss.\"", "\"I did the WDI course.\"", "\"Kristos words of wisdom\""]
         var krissText = game.add.text(700, 600, _.sample(krissisms), krissStyle);  
        
@@ -695,7 +695,7 @@ $(document).ready(function() {
     function ollySpeak (player, Olly) {
     
         // Samples an array of Olly's best comments
-        ollyStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        ollyStyle = { font: "20px Arial", fill: "#fff", align: "center" };
         var ollyisms = ["\"This is Olly.\"", "\"I did the WDI course.\"", "\"Ollys words of wisdom\""]
         var ollyText = game.add.text(700, 500, _.sample(ollyisms), ollyStyle);  
        
@@ -710,8 +710,8 @@ $(document).ready(function() {
     function tomSpeak (player, Tom) {
     
         // Samples an array of Tom's best comments
-        tomStyle = { font: "30px Arial", fill: "#fff", align: "center" };
-        var tomisms = ["\"This is Tom.\"", "\"I did the WDI course.\"", "\"Toms words of wisdom\""]
+        tomStyle = { font: "20px Arial", fill: "#fff", align: "center" };
+        var tomisms = ["\"Hi I'm Tom Dane, your friendly NPC.\"", "\"Thank you for finding me, but our princess is in another castle.\"", "\"I used to be a project manager, but then I took a WDI to the knee\""]
         var tomText = game.add.text(700, 400, _.sample(tomisms), tomStyle);  
        
         // Call removeText function after a couple seconds
@@ -725,7 +725,7 @@ $(document).ready(function() {
     function mathildaSpeak (player, Mathilda) {
 
         // Samples an array of Mathilda's best comments
-        mathildaStyle = { font: "30px Arial", fill: "#fff", align: "center" };
+        mathildaStyle = { font: "20px Arial", fill: "#fff", align: "center" };
         var mathildaisms = ["\"This is Mathilda.\"", "\"I teach the WDI course.\"", "\"Mathildas words of wisdom\""]
         var mathildaText = game.add.text(700, 700, _.sample(mathildaisms), mathildaStyle);  
        
