@@ -160,10 +160,71 @@ $(document).ready(function() {
         };
 
         //LOWER LEFT ROOM
-        createInvisWall(0, 1182, 416, 12);
-        createInvisWall(386, 1183, 30, 87);
-        createInvisWall(0, 1377, 413, 24);
-        createInvisWall(385, 1314, 31, 86);
+        createInvisWall(1,1182,416,12);
+        createInvisWall(386,1183,30,87);
+        createInvisWall(1,1377,413,24);
+        createInvisWall(385,1314,31,86);
+
+        //MIDDLE LEFT ROOM
+        createInvisWall(1,1139,368,28);
+        createInvisWall(343,988,26,178);
+        createInvisWall(1,720,368,21);
+        createInvisWall(343,740,25,159);
+
+        //UPPER LEFT ROOM
+        createInvisWall(1,671,362,43);
+        createInvisWall(318,1,44,499);
+        createInvisWall(1,1,319,11);
+        
+        //TOP 2ND FROM THE LEFT ROOM
+        createInvisWall(367,1,43,573);
+        createInvisWall(409,531,239,43);
+        createInvisWall(786,531,276,44);
+        createInvisWall(1030,1,33,530);
+
+        //TOP 2ND FROM THE RIGHT ROOM
+        createInvisWall(1078,1,42,575);
+        createInvisWall(1120,531,8,45);
+        createInvisWall(1298,532,462,45);
+        createInvisWall(1725,1,34,531);
+
+        //TOP RIGHT ROOM
+        createInvisWall(1815,1,131,15);
+        createInvisWall(2048,1,152,15);
+        createInvisWall(1772,1,43,576);
+        createInvisWall(1815,538,127,39);
+        createInvisWall(2080,538,120,40);
+
+        //MIDDLE RIGHT ROOM
+        createInvisWall(2097,589,103,38);
+        createInvisWall(1381,589,547,38);
+        createInvisWall(1380,626,43,516);
+        createInvisWall(1423,1106,303,37);
+        createInvisWall(1899,1107,301,36);
+
+        //LOWER RIGHT SMALL ROOM
+        createInvisWall(2130,1325,70,29);
+        createInvisWall(1998,1326,88,29);
+        createInvisWall(1998,1354,12,296);
+
+        //LOWER 2ND FROM THE RIGHT SMALL ROOM
+        createInvisWall(1726,1324,106,36);
+        createInvisWall(1726,1360,14,290);
+        createInvisWall(1885,1324,105,36);
+        createInvisWall(1978,1360,12,291);
+
+        //LOWER 3RD FROM THE RIGHT SMALL ROOM
+        createInvisWall(1492,1387,94,33);
+        createInvisWall(1573,1418,13,232);
+        createInvisWall(1352,1388,94,31);
+        createInvisWall(1352,1419,13,231);
+
+        //LOWER 4TH FROM THE RIGHT SMALL ROOM
+        createInvisWall(1081,1322,104,35);
+        createInvisWall(1081,1357,14,293);
+        createInvisWall(1237,1321,104,36);
+        createInvisWall(1327,1357,14,293);
+
 
 // <<===========================================================================================================>> 
 
